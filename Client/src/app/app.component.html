@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12" *ngFor="let item of array">
+      <div>
+        {{item.nombre}}
+      </div>
+    </div>
+    <button (click)="guardarPerson()">
+      guardar
+    </button>
+  </div>
+</div>
