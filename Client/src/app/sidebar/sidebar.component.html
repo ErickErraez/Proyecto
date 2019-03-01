@@ -1,0 +1,33 @@
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <a class="simple-text">
+            <div class="logo-img">
+                <img src="/assets/img/iepi.png" />
+            </div>
+            SENADI
+        </a>
+    </div>
+    <ul class="nav responsive-nav nested-menu">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]">
+                <i class="{{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+        <li routerLinkActive="active" class="">
+            <a (click)="addExpandClass('pages5')">
+                <i class="fa fa-plus"></i>
+                <p>ARCHIVOS DESCARGABLES</p>
+
+            </a>
+        <li class="nested" [class.expand]="showMenu === 'pages5'">
+            <ul class="submenu">
+                <li routerLinkActive="active">
+                    <a>
+                        <span><i class="pe-7s-map-marker"></i></span>&nbsp;ARCHIVOS PARA DESCARGAR
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,26 @@
+.nested-menu {
+    .list-group-item {
+        cursor: pointer;
+    }
+    .nested {
+        list-style-type: none;
+    }
+    ul.submenu {
+        display: none;
+        height: 0;
+    }
+    & .expand {
+        ul.submenu {
+            display: block;
+            list-style-type: none;
+            height: 20px;
+            li {
+                a {
+                    color: #FFF;
+                    padding: 0px;
+                    display: block;
+                }
+            }
+        }
+    }
+}
