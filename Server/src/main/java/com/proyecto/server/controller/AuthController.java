@@ -44,7 +44,6 @@ public class AuthController {
 			DirContext ctx;
 			try {
 				ctx = new InitialDirContext(env);
-				System.out.println("Bienvenidop");
 				return new ResponseEntity(HttpStatus.OK);
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   user: String;
   password: String;
   constructor(private authServices: AuthenticationService) {
-    
+
   }
 
   ngOnInit() {
@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authServices.loginPerson(this.user+'@iepi', this.password);
+    this.authServices.loginPerson(this.user + '@iepi', this.password);
   }
-
 }
