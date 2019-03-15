@@ -23,7 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpModule,
     NavbarModule,
     SidebarModule,
-    BrowserModule, 
+    BrowserModule,
     AppRoutingModule,
     ToastrModule.forRoot({
       timeOut: 10000,

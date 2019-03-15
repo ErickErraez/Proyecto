@@ -29,7 +29,7 @@ public class DataBaseConfiguration {
 	public DataSource dataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/senadi?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); 
+		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/intranet?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); 
 		dataSource.setUsername("prueba");
 		dataSource.setPassword("12345678");
 		

@@ -23,6 +23,8 @@
         "@angular/platform-browser-dynamic": "6.1.7",
         "@angular/router": "6.1.7",
         "@fortawesome/fontawesome-free": "^5.7.2",
+        "@ng-bootstrap/ng-bootstrap": "^3.3.1",
+        "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
         "@ngui/map": "0.30.3",
         "@types/googlemaps": "3.30.13",
         "animate.css": "^3.7.0",
@@ -34,10 +36,12 @@
         "googleapis": "33.0.0",
         "jquery": "3.3.1",
         "ng6-toastr": "6.0.0",
+        "ngx-smart-modal": "^7.1.1",
         "ngx-toastr": "^9.2.0",
         "perfect-scrollbar": "^1.4.0",
         "rxjs": "6.3.2",
         "rxjs-compat": "6.3.2",
+        "web-animations-js": "^2.3.1",
         "zone.js": "0.8.26"
     },
     "devDependencies": {

@@ -11,6 +11,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: HomeComponent},
     { path: 'library', component: LibraryComponent },
     { path: 'icons', component: IconsComponent },
-    { path: 'view/:id', component: ViewAppComponent },
+    { path: 'view', component: ViewAppComponent },
     { path: '', redirectTo: 'dashboard' },
 ];

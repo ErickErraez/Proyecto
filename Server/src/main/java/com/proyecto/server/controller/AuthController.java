@@ -5,9 +5,12 @@ import java.util.Hashtable;
 import java.util.List;
 
 import javax.naming.Context;
+import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
+import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.sun.jndi.ldap.LdapCtxFactory;
 
 import com.proyecto.server.model.AuthModel;
 
@@ -49,7 +53,6 @@ public class AuthController {
 				// TODO Auto-generated catch block
 				return new ResponseEntity(HttpStatus.NOT_FOUND);
 			}
-
 		}
 
 	}

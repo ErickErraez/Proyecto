@@ -9,11 +9,13 @@ import { IconsComponent } from '../../icons/icons.component';
 import { ViewAppComponent } from 'app/view-app/view-app.component';
 import { UrlPipe } from 'app/pipes/url.pipe';
 import { LibraryComponent } from 'app/library/library.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    NgbModule.forRoot(),
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
 
