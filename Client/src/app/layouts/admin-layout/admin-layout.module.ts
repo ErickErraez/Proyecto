@@ -10,6 +10,7 @@ import { ViewAppComponent } from 'app/view-app/view-app.component';
 import { UrlPipe } from 'app/pipes/url.pipe';
 import { LibraryComponent } from 'app/library/library.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     HomeComponent,
+    DashboardComponent,
     LibraryComponent,
     IconsComponent,
     ViewAppComponent,

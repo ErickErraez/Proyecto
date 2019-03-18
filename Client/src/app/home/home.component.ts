@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
 
   app: Aplicacion;
   adj: Adjunto;
+  appInternas = [];
+  appExternas = [];
   isNewApp = false;
   adjs: any = [];
   apps: any = [];
@@ -50,11 +52,10 @@ export class HomeComponent implements OnInit {
   }
 
   saveApps() {
-    this.isNewApp = false;
     if (this.srcFoto == "assets/img/iepi.png") {
       this.toastr.error('Debe cambiar la imagen!', 'Oops algo ha salido mal!');
     }
-    if (this.app.nombre === undefined || this.app.link === undefined || this.srcFoto == "assets/img/iepi.png") {
+    if (this.app.nombre === undefined || this.app.tipo === undefined || this.app.link === undefined || this.app.tipo  === 'Seleccione') {
       this.toastr.error('Debes completar todos los campos!', 'Oops algo ha salido mal!');
     } else {
       this.http.post(environment.url + 'adjunto/saveAdjs', this.attached).toPromise().then(image => {
@@ -63,8 +64,11 @@ export class HomeComponent implements OnInit {
             idApp: app.json().idApp, adjunto: { idAdj: image.json().idAdj }
           }
           this.http.put(environment.url + 'aplications/apps/adjs', this.appImage).toPromise().then(res => {
-            this.toastr.success('Bienvenido a Intranet!', 'Se ha guardado con exito!');
+            this.toastr.success('La Aplicacion!', 'Se ha guardado con exito!');
+            this.appExternas = [];
+            this.appInternas = [];
             this.getData();
+            this.Cancelar();
           }).catch(err => {
             console.log(err.json());
           });
@@ -80,9 +84,10 @@ export class HomeComponent implements OnInit {
 
   Cancelar() {
     this.isNewApp = false;
-    if (this.app.nombre !== undefined || this.app.link !== undefined || this.srcFoto !== "assets/img/iepi.png") {
+    if (this.app.nombre !== undefined || this.app.tipo !== undefined || this.app.link !== undefined || this.srcFoto !== "assets/img/iepi.png") {
       this.app.nombre = "";
       this.app.link = "";
+      this.app.tipo = "Seleccione";
       this.srcFoto = "assets/img/iepi.png";
     }
   }
@@ -96,8 +101,14 @@ export class HomeComponent implements OnInit {
     });
 
     this.http.get(environment.url + 'aplications/getApps').toPromise().then(r => {
-      this.apps = r.json();
-      console.log(this.apps);
+
+      for (var i = 0; i < r.json().length; i++) {
+        if (r.json()[i].tipo == 'Interna') {
+          this.appInternas.push(r.json()[i]);
+        } else {
+          this.appExternas.push(r.json()[i]);
+        }
+      }
     }).catch(e => {
       console.log(e);
     });

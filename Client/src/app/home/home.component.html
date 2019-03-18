@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="header">
                         <h3 class="title">Agregar Aplicaciones</h3>
-                        <label>Ingreso Aplicaciones Internas</label>
+                        <label>Ingreso de Aplicaciones</label>
                     </div>
                     <div class="content">
                         <form>
@@ -17,16 +17,18 @@
                                             <input name="nombre" [(ngModel)]="this.app.nombre" type="text"
                                                 class="form-control" id="name" placeholder="Ingrese Nombre">
                                         </b>
+                                        <br>
                                         <b>
                                             <label for="formGroupExampleInput"> Link de la Aplicacion:</label>
                                             <input name="link" [(ngModel)]="this.app.link" type="text"
                                                 class="form-control" id="name" placeholder="Ingrese Nombre">
                                         </b>
+                                        <br>
                                         <b>
                                             <label for="formGroupExampleInput"> Tipo Aplicacion:</label>
                                             <select class="custom-select" id="sexo" [(ngModel)]="this.app.tipo"
                                                 name="tipo">
-                                                <option selected>Seleccione...</option>
+                                                <option value="Seleccione">Seleccione...</option>
                                                 <option value="Interna">Interna</option>
                                                 <option value="Externa">Externa</option>
                                             </select>
@@ -53,16 +55,17 @@
                 <div class="card">
                     <div class="header">
                         <h3 class="title">Aplicaciones Internas</h3>
-                        <label>Ingreso Aplicaciones Internas</label>
+                        <label>Lista de Aplicaciones Internas</label>
                     </div>
                     <div class="content">
                         <form>
                             <div class="row">
-                                <div class="col-md-2" *ngFor="let apli of apps">
-                                    <div *ngIf="apli.tipo == 'Interna'">
+                                <div class="col-md-3 text-center" *ngFor="let apli of appInternas">
+                                    <div>
                                         <a href="{{apli.link}}" target="_blank"><img class="redondeado"
                                                 src="data:{{apli.adjunto.tipoArchivo}};base64,{{apli.adjunto.adjuntoArchivo}}"
-                                                width="60px" height="60px" title="{{apli.nombre}}"></a>
+                                                width="70px" height="70px" title="{{apli.nombre}}"></a><br>
+                                        <b>{{apli.nombre}}</b>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -79,30 +82,29 @@
                 <div class="card">
                     <div class="header">
                         <h3 class="title">Aplicaciones Externas</h3>
-                        <label>Ingreso Aplicaciones Externas</label>
+                        <label>Lista de Aplicaciones Externas</label>
                     </div>
                     <div class="content">
                         <form>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-2" *ngFor="let apli of apps">
-                                                <div *ngIf="apli.tipo == 'Externa'">
-                                                    <a href="{{apli.link}}" target="_blank"><img class="redondeado"
-                                                            src="data:{{apli.adjunto.tipoArchivo}};base64,{{apli.adjunto.adjuntoArchivo}}"
-                                                            width="60px" height="60px" title="{{apli.nombre}}"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                <div class="col-md-3 text-center" *ngFor="let apli of appExternas">
+                                    <div>
+                                        <a href="{{apli.link}}" target="_blank"><img class="redondeado"
+                                                src="data:{{apli.adjunto.tipoArchivo}};base64,{{apli.adjunto.adjuntoArchivo}}"
+                                                width="70px" height="70px" title="{{apli.nombre}}"></a><br>
+                                        <b>{{apli.nombre}}</b>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <a (click)="isNewApp = true"><i class="far fa-plus-square fa-4x icon-redo"
+                                            style="color: rgb(202, 202, 202);"></i></a>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
