@@ -67,8 +67,8 @@ export class HomeComponent implements OnInit {
             this.toastr.success('La Aplicacion!', 'Se ha guardado con exito!');
             this.appExternas = [];
             this.appInternas = [];
-            this.getData();
             this.Cancelar();
+            this.getData();
           }).catch(err => {
             console.log(err.json());
           });
