@@ -4,27 +4,35 @@
             <div class="col-md-12">
                 <h3 class="title text-center">Biblioteca Digital</h3>
                 <br>
-                <ul class="ul-downloads nested-menu">
-                    <li class="li-gray2">
-                        <a class="active" (click)="addExpandClass('pages5')">
-                            <i class="fas fa-plus"  *ngIf="!isExpand"></i> <i class="fas fa-minus" *ngIf="isExpand"></i> Auditoría Interna de
-                            la Contraloría General del Estado
+                <ul class="ul-downloads nested-menu" *ngFor="let item of libraries">
+                    <li [ngClass]=" typeClass(item.idBib) ? 'li-gray2' : 'li-gray1'">
+                        <a class="active" (click)="addExpandClass(item.idBib)">
+                            <i class="fas fa-plus" *ngIf="showMenu !== item.idBib"></i> <i class="fas fa-minus"
+                                *ngIf="showMenu === item.idBib"></i>
+                            {{item.nombre}}
                         </a>
                     </li>
-                    <li class="nested" [class.expand]="showMenu === 'pages5'">
+                    <li class="nested" [class.expand]="showMenu === item.idBib">
                         <ul class="submenu">
-                            <span class="ico"></span>Auditoría Interna de
-                            la Contraloría General del Estado
+                            <span class="ico"><i class="fas fa-angle-double-right"></i></span> {{item.catalogo.nombre}}
+                            <div class="text-right posicionA">
+                                <a
+                                    (click)="showPdf(item.catalogo.adjunto.nombreArchivo,item.catalogo.adjunto.adjuntoArchivo)">
+                                    <b> Ver</b>
+                                </a>
+                                
+                                <a
+                                    (click)="downloadPdf(item.catalogo.adjunto.nombreArchivo,item.catalogo.adjunto.tipoArchivo,item.catalogo.adjunto.adjuntoArchivo)">
+                                    <b> Descargar</b>
+                                </a>
+
+                            </div>
                         </ul>
+
                     </li>
-                    <li class="li-gray1" id="cat-777"><a><span class="ico">+</span>Bienes Objeto de Chatarrización</a>
-                    </li>
-                    <li class="li-gray2" id="cat-1363"><a><span class="ico">+</span>Cumplimiento al Decreto Nro. 135
-                            Normas de optimización y austeridad del Gasto Público</a></li>
 
                 </ul>
             </div>
-
         </div>
     </div>
 </div>

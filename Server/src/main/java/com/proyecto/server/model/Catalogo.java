@@ -35,6 +35,42 @@ public class Catalogo implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public Catalogo(String nombre, Adjunto adjunto) {
+		super();
+		this.nombre = nombre;
+		this.adjunto = adjunto;
+	}
+
+
+	public Long getIdCat() {
+		return idCat;
+	}
+
+
+	public void setIdCat(Long idCat) {
+		this.idCat = idCat;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public Adjunto getAdjunto() {
+		return adjunto;
+	}
+
+
+	public void setAdjunto(Adjunto adjunto) {
+		this.adjunto = adjunto;
+	}
 	
 	
 
