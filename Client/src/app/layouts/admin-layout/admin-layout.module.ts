@@ -11,11 +11,15 @@ import { UrlPipe } from 'app/pipes/url.pipe';
 import { LibraryComponent } from 'app/library/library.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { RolComponent } from '../rol/rol.component';
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 
 @NgModule({
   imports: [
-    CommonModule,
+    
+    CommonModule, 
+    FullCalendarModule ,
     NgbModule.forRoot(),
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
@@ -23,6 +27,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
   ],
   declarations: [
     HomeComponent,
+    RolComponent,
     DashboardComponent,
     LibraryComponent,
     IconsComponent,

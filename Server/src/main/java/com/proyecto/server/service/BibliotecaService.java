@@ -13,5 +13,7 @@ public interface BibliotecaService {
 	Biblioteca findById(Long idBib);
 	
 	List<Biblioteca> findAllAdjunto();
+	
+	Biblioteca findByName(String nombre);
 
 }

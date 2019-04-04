@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   isNewApp = false;
   adjs: any = [];
   apps: any = [];
+  userRol = sessionStorage.getItem('UserRol');
   appImage = {};
 
   attached: Adjunto;
@@ -55,7 +56,7 @@ export class HomeComponent implements OnInit {
     if (this.srcFoto == "assets/img/iepi.png") {
       this.toastr.error('Debe cambiar la imagen!', 'Oops algo ha salido mal!');
     }
-    if (this.app.nombre === undefined || this.app.tipo === undefined || this.app.link === undefined || this.app.tipo  === 'Seleccione') {
+    if (this.app.nombre === undefined || this.app.tipo === undefined || this.app.link === undefined || this.app.tipo === 'Seleccione') {
       this.toastr.error('Debes completar todos los campos!', 'Oops algo ha salido mal!');
     } else {
       this.http.post(environment.url + 'adjunto/saveAdjs', this.attached).toPromise().then(image => {
@@ -112,6 +113,14 @@ export class HomeComponent implements OnInit {
     }).catch(e => {
       console.log(e);
     });
+  }
+
+  checkRol(){
+    if(this.userRol == 'Administrador' || this.userRol == 'Escritura'){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

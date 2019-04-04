@@ -29,6 +29,9 @@ public class Catalogo implements Serializable{
 	@JoinColumn(name = "idPdf")
 	private Adjunto adjunto;
 	
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idBib")
+	private Biblioteca biblioteca;
 	
 	public Catalogo() {
 		super();
@@ -70,6 +73,16 @@ public class Catalogo implements Serializable{
 
 	public void setAdjunto(Adjunto adjunto) {
 		this.adjunto = adjunto;
+	}
+
+
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
+
+
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
 	}
 	
 	

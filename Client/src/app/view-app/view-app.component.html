@@ -1,3 +1,20 @@
 <div class="main-content">
-  <iframe [src]="url | pieURL" style="width:100%; height:530px; border-style: none;"></iframe>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+          {{1556409600000 | date}}
+          <input type="date" class="form-control" id="birthdate" [(ngModel)]="prueba" /> <br>
+          <input type="date" class="form-control" id="birthdate" [(ngModel)]="salida" /> <br>
+          <input type="text" class="form-control" id="birthdate" [(ngModel)]="titulo">
+        <a (click)="loadevents()"> loadevents</a>
+        <p>Display event : {{displayEvent | json}}</p>
+        <div *ngIf="calendarOptions">
+          <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)"
+            (eventDrop)="updateEvent($event.detail)" (eventResize)="updateEvent($event.detail)"
+            (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events">
+          </ng-fullcalendar>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

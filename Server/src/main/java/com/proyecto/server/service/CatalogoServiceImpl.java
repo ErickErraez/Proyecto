@@ -49,4 +49,12 @@ public class CatalogoServiceImpl implements CatalogoService {
 		return _catalogoDao.findAllAdjuntos();
 	}
 
+	@Override
+	public Catalogo findByName(String nombre) {
+		// TODO Auto-generated method stub
+		return _catalogoDao.findByName(nombre);
+	}
+
+	
+	
 }

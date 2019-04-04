@@ -14,4 +14,6 @@ public interface CatalogoService {
 	
 	List<Catalogo> findAllAdjunto();
 
+	Catalogo findByName(String nombre); 
+	
 }

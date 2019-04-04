@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.server.dao.UserDao;
-import com.proyecto.server.model.Usuarios;
-
+import com.proyecto.server.model.AuthModel;
 
 @Service("userService")
 @Transactional
@@ -15,9 +14,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao _userDao;
-	
+
 	@Override
-	public Usuarios saveUser(Usuarios usuario) {
+	public AuthModel saveUser(AuthModel usuario) {
 		// TODO Auto-generated method stub
 		return _userDao.saveUser(usuario);
 	}
@@ -29,28 +28,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Usuarios updateUser(Usuarios usuario) {
+	public AuthModel updateUser(AuthModel usuario) {
 		// TODO Auto-generated method stub
 		return _userDao.updateUser(usuario);
 	}
 
 	@Override
-	public Usuarios findById(Long idUser) {
+	public AuthModel findById(Long idUser) {
 		// TODO Auto-generated method stub
 		return _userDao.findById(idUser);
 	}
 
 	@Override
-	public Usuarios findByName(String nombre) {
+	public AuthModel findByName(String nombre) {
 		// TODO Auto-generated method stub
 		return _userDao.findByName(nombre);
 	}
 
 	@Override
-	public List<Usuarios> findAllUsers() {
+	public List<AuthModel> findAllUsers() {
 		// TODO Auto-generated method stub
 		return _userDao.findAllUsers();
 	}
 
-	
 }

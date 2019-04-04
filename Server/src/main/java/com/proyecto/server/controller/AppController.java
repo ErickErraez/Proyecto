@@ -16,6 +16,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.proyecto.server.model.Adjunto;
 import com.proyecto.server.model.Aplicaciones;
+import com.proyecto.server.model.AuthModel;
+import com.proyecto.server.model.UserRol;
 import com.proyecto.server.service.AdjuntoService;
 import com.proyecto.server.service.AplicacionesService;
 
@@ -58,7 +60,7 @@ public class AppController {
 	@RequestMapping(value = "/apps/adjs", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<Aplicaciones> assignAplicacionesToImage(@RequestBody Aplicaciones apps,
 			UriComponentsBuilder ucBuilder) {
-		System.out.println(apps);
+		
 		if (apps.getIdApp() == null || apps.getAdjunto().getIdAdj() == null) {
 			return new ResponseEntity("Faltan Datos", HttpStatus.CONFLICT);
 		}
@@ -75,5 +77,7 @@ public class AppController {
 
 		return new ResponseEntity<Aplicaciones>(appsSaved, HttpStatus.OK);
 	}
+	
+	
 
 }

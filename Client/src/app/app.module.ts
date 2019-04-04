@@ -9,11 +9,11 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 
 import { AppComponent } from './app.component';
-
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
+import { EventSesrvice } from './services/event.service';
 
 @NgModule({
   imports: [
@@ -36,7 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     AdminLayoutComponent,
     LoginComponent,
   ],
-  providers: [],
+  providers: [EventSesrvice],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,12 +38,27 @@ public class BibliotecaController {
 
 	}
 
+	// Get By Id
+
+	@RequestMapping(value = "/getBiblioteca/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ResponseEntity<Biblioteca> getBibliotecaById(@PathVariable("id") Long id) {
+		Biblioteca biblioteca = _bibliotecaService.findById(id);
+		if (biblioteca == null) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+			// You many decide to return HttpStatus.NOT_FOUND
+		}
+		return new ResponseEntity<Biblioteca>(biblioteca, HttpStatus.OK);
+	}
+
 	// Save User
 	@RequestMapping(value = "/saveBib", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ResponseEntity<?> createApp(@RequestBody Biblioteca bibliotecas, UriComponentsBuilder uriComponentsBuilder) {
 
 		if (bibliotecas.getNombre().equals(null) || bibliotecas.getNombre().isEmpty()) {
 			return new ResponseEntity("El Nombre es requerido", HttpStatus.CONFLICT);
+		}
+		if (_bibliotecaService.findByName(bibliotecas.getNombre()) != null) {
+			return new ResponseEntity("Ya existe", HttpStatus.CONFLICT);
 		}
 
 		_bibliotecaService.saveBiblioteca(bibliotecas);
@@ -52,26 +68,5 @@ public class BibliotecaController {
 	}
 
 	// ASSIGN Catalogos
-
-	@RequestMapping(value = "/bib/cat", method = RequestMethod.PUT, headers = "Accept=application/json")
-	public ResponseEntity<Biblioteca> assignCatalogo(@RequestBody Biblioteca biblioteca,
-			UriComponentsBuilder ucBuilder) {
-
-		if (biblioteca.getIdBib() == null || biblioteca.getCatalogo().getIdCat() == null) {
-			return new ResponseEntity("Faltan Datos", HttpStatus.CONFLICT);
-		}
-		Biblioteca bibliotecaSaved = _bibliotecaService.findById(biblioteca.getIdBib());
-		if (bibliotecaSaved == null) {
-			return new ResponseEntity("No se Encontro", HttpStatus.CONFLICT);
-		}
-		Catalogo cat = _catalogoService.findById(biblioteca.getCatalogo().getIdCat());
-		if (cat == null) {
-			return new ResponseEntity("No se Encontro", HttpStatus.CONFLICT);
-		}
-		bibliotecaSaved.setCatalogo(cat);
-		_bibliotecaService.updateBiblioteca(bibliotecaSaved);
-
-		return new ResponseEntity<Biblioteca>(bibliotecaSaved, HttpStatus.OK);
-	}
 
 }

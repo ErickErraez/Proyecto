@@ -28,9 +28,10 @@
         border-bottom-width: 1px;
         font-size: $font-size-small;
         text-transform: uppercase;
-        color: $dark-gray;
+        color: rgb(255, 255, 255);
+        background-color: $black-bg;
         font-weight: $font-weight-normal;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
     }
 
    .td-actions .btn{

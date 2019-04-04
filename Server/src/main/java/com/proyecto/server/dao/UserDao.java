@@ -1,22 +1,24 @@
 package com.proyecto.server.dao;
 
 import java.util.List;
+
+import com.proyecto.server.model.AuthModel;
 import com.proyecto.server.model.Usuarios;
 
 
 
 public interface UserDao {
 
-	Usuarios saveUser(Usuarios usuario);
+	AuthModel saveUser(AuthModel usuario);
 	
 	void deleteUser(Long idUser);
 	
-	Usuarios updateUser(Usuarios usuario);
+	AuthModel updateUser(AuthModel usuario);
 	
-	Usuarios findById(Long idUser);
+	AuthModel findById(Long idUser);
 	
-	List<Usuarios> findAllUsers();
+	List<AuthModel> findAllUsers();
 	
-	Usuarios findByName(String nombre);
+	AuthModel findByName(String nombre);
 	
 }

@@ -16,6 +16,8 @@ public interface BibliotecaDao {
 	
 	Biblioteca findById(Long idBib);
 	
+	Biblioteca findByName(String nombre);
+	
 	List<Biblioteca> findAllAdjuntos();
 	
 }

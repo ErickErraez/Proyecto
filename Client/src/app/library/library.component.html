@@ -1,37 +1,108 @@
 <div class="main-content">
     <div class="container-fluid">
+        <div class="row" *ngIf="isNewBib">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h3 class="title">Agregar Biblioteca</h3>
+                    </div>
+                    <div class="content">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-7" *ngIf="isNewName">
+                                    <div class="form-group">
+                                        <b *ngIf="isExistsBib">
+                                            <label for="formGroupExampleInput"> Nombre de la Seccion:</label><br>
+                                            <select class="custom-select" [(ngModel)]="library.idBib"
+                                                (click)="getLibrary()" name="idBib">
+                                                <option value="undefined">Seleccione...</option>
+                                                <option *ngFor="let bib of libraries" value="{{bib.idBib}}">
+                                                    {{bib.nombre}}</option>
+                                            </select>
+                                        </b>
+                                        <br>
+                                        <b *ngIf="!isExistsBib">
+                                            <label for="formGroupExampleInput"> Nombre de la Seccion:</label>
+                                            <input type="text" class="form-control" id="name"
+                                                [(ngModel)]="library.nombre" name="nombre"
+                                                placeholder="Ingrese el Nombre">
+                                        </b>
+                                        <br>
+                                        <b *ngIf="isExists">
+                                            <label for="formGroupExampleInput"> Nombre del Documento:</label>
+                                            <input type="text" class="form-control" id="name" [(ngModel)]="cat.nombre"
+                                                name="nombre" placeholder="Ingrese el Nombre">
+                                        </b>
+                                        <br>
+                                    </div>
+                                    <button type="submit" *ngIf="!activarBoton" disabled (click)="save()"
+                                        class="btn btn-primary prueba">Guardar</button>
+                                    <button type="submit" *ngIf="activarBoton" (click)="save()"
+                                        class="btn btn-primary prueba">Guardar</button>
+                                    <button type="submit" (click)="Cancelar()" class="btn btn-danger">Cancelar</button>
+                                </div>
+
+                                <div class="col-md-1"></div>
+                                <div class="col-md-4" *ngIf="isExists">
+                                    <label for="formGroupExampleInput"> Subir Archivo:</label> <br>
+                                    <img (click)="fileInput.click()" class="card-img fotoPerfilPortada image-rounded"
+                                        src="{{srcFoto}}" width="150px" height="150px" /> <br> <br>
+                                    <div class="progress tamañoBarra" *ngIf="showBar">
+                                        <div class="progress-bar progress-bar-striped colorFondo" id="barra"
+                                            role="progressbar" [ngStyle]="{'width.%': width}" aria-valuemin="0"
+                                            aria-valuemax="100">
+                                            {{width}}%
+                                        </div>
+                                    </div>
+                                    <input hidden=true type="file" style="display: none;" #fileInput
+                                        (change)="CodificarArchivo($event)" accept="application/*">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <h3 class="title text-center">Biblioteca Digital</h3>
                 <br>
-                <ul class="ul-downloads nested-menu" *ngFor="let item of libraries">
-                    <li [ngClass]=" typeClass(item.idBib) ? 'li-gray2' : 'li-gray1'">
-                        <a class="active" (click)="addExpandClass(item.idBib)">
-                            <i class="fas fa-plus" *ngIf="showMenu !== item.idBib"></i> <i class="fas fa-minus"
-                                *ngIf="showMenu === item.idBib"></i>
-                            {{item.nombre}}
-                        </a>
-                    </li>
-                    <li class="nested" [class.expand]="showMenu === item.idBib">
-                        <ul class="submenu">
-                            <span class="ico"><i class="fas fa-angle-double-right"></i></span> {{item.catalogo.nombre}}
-                            <div class="text-right posicionA">
-                                <a
-                                    (click)="showPdf(item.catalogo.adjunto.nombreArchivo,item.catalogo.adjunto.adjuntoArchivo)">
-                                    <b> Ver</b>
-                                </a>
-                                &nbsp;
-                                <a
-                                    (click)="downloadPdf(item.catalogo.adjunto.nombreArchivo,item.catalogo.adjunto.tipoArchivo,item.catalogo.adjunto.adjuntoArchivo)">
-                                    <b> Descargar</b>
-                                </a>
-                                &nbsp;
-                            </div>
-                        </ul>
 
-                    </li>
+                <ng-container *ngIf="checkRol()">
+                    <button type="button" class="btn btn-warning" (click)="agregarBiblioteca()">Nueva Seccion</button>
+                    <button type="button" class="btn btn-primary" (click)="agregarArchivo()">Agregar Archivo</button>
+                </ng-container>
+                <ng-container *ngFor="let item of libraries">
 
-                </ul>
+                    <ul class="ul-downloads nested-menu">
+                        <li [ngClass]=" typeClass(item.idBib) ? 'li-gray2' : 'li-gray1'">
+                            <a class="active" (click)="addExpandClass(item.idBib)">
+                                <i class="fas fa-plus" *ngIf="showMenu !== item.idBib"></i> <i class="fas fa-minus"
+                                    *ngIf="showMenu === item.idBib"></i>
+                                {{item.nombre}}
+                            </a>
+                        </li>
+                        <li class="nested" [class.expand]="showMenu === item.idBib">
+                            <ng-container *ngFor="let cat of catalogo">
+                                <ul class="submenu" *ngIf="item.idBib === cat.biblioteca.idBib">
+                                    <span class="ico"><i class="fas fa-angle-double-right"></i></span>
+                                    {{cat.nombre}}
+                                    <div class="text-right posicionA">
+                                        <a (click)="showPdf(cat.adjunto.nombreArchivo,cat.adjunto.adjuntoArchivo)">
+                                            <b> Ver</b>
+                                        </a>
+                                        &nbsp;
+                                        <a
+                                            (click)="downloadPdf(cat.adjunto.nombreArchivo,cat.adjunto.tipoArchivo,cat.adjunto.adjuntoArchivo)">
+                                            <b> Descargar</b>
+                                        </a>
+                                        &nbsp;
+                                    </div>
+                                </ul>
+                            </ng-container>
+                        </li>
+                    </ul>
+                </ng-container>
             </div>
         </div>
     </div>

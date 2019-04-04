@@ -48,6 +48,12 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 		return _bibliotecaDao.findAllAdjuntos();
 	}
 
+	@Override
+	public Biblioteca findByName(String nombre) {
+		// TODO Auto-generated method stub
+		return _bibliotecaDao.findByName(nombre);
+	}
+
 	
 	
 	

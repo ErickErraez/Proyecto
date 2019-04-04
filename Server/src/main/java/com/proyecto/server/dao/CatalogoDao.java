@@ -15,6 +15,8 @@ public interface CatalogoDao {
 	
 	Catalogo findById(Long idCat);
 	
+	Catalogo findByName(String nombre);
+	
 	List<Catalogo> findAllAdjuntos();
 	
 }

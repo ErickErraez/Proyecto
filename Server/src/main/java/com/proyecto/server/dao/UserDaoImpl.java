@@ -4,6 +4,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+
+import com.proyecto.server.model.AuthModel;
 import com.proyecto.server.model.Usuarios;
 
 
@@ -12,7 +14,7 @@ import com.proyecto.server.model.Usuarios;
 public class UserDaoImpl extends AbstractSession implements UserDao {
 
 	@Override
-	public Usuarios saveUser(Usuarios usuario) {
+	public AuthModel saveUser(AuthModel usuario) {
 		// TODO Auto-generated method stub
 		getSession().persist(usuario);
 		return usuario;
@@ -21,7 +23,7 @@ public class UserDaoImpl extends AbstractSession implements UserDao {
 	@Override
 	public void deleteUser(Long idUser) {
 		// TODO Auto-generated method stub
-		Usuarios usuario = findById(idUser);
+		AuthModel usuario = findById(idUser);
 		if (usuario != null) {
 			
 			getSession().delete(usuario);
@@ -29,30 +31,30 @@ public class UserDaoImpl extends AbstractSession implements UserDao {
 	}
 
 	@Override
-	public Usuarios updateUser(Usuarios usuario) {
+	public AuthModel updateUser(AuthModel usuario) {
 		// TODO Auto-generated method stub
 		getSession().update(usuario);
 		return usuario;
 	}
 
 	@Override
-	public Usuarios findById(Long idUser) {
+	public AuthModel findById(Long idUser) {
 		// TODO Auto-generated method stub
-		return getSession().get(Usuarios.class, idUser);
+		return getSession().get(AuthModel.class, idUser);
 	}
 	
 	@Override
-	public List<Usuarios> findAllUsers() {
+	public List<AuthModel> findAllUsers() {
 		// TODO Auto-generated method stub
-		return getSession().createQuery("from Usuarios").list();
+		return getSession().createQuery("from AuthModel").list();
 	}
 
 	@Override
-	public Usuarios findByName(String nombre) {
+	public AuthModel findByName(String userName) {
 		// TODO Auto-generated method stub
-		return (Usuarios) getSession().createQuery(
-				"from Usuarios where nombre = :nombre")
-				.setParameter("nombre", nombre).uniqueResult();
+		return (AuthModel) getSession().createQuery(
+				"from AuthModel where userName = :userName")
+				.setParameter("userName", userName).uniqueResult();
 	}
 	
 	

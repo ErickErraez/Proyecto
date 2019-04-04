@@ -68,7 +68,7 @@
                                         <b>{{apli.nombre}}</b>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" *ngIf="checkRol()">
                                     <a (click)="isNewApp = true"><i class="far fa-plus-square fa-4x icon-redo"
                                             style="color: rgb(202, 202, 202);"></i></a>
                                 </div>
@@ -95,7 +95,7 @@
                                         <b>{{apli.nombre}}</b>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" *ngIf="checkRol()">
                                     <a (click)="isNewApp = true"><i class="far fa-plus-square fa-4x icon-redo"
                                             style="color: rgb(202, 202, 202);"></i></a>
                                 </div>

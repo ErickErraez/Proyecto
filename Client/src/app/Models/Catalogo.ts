@@ -1,5 +1,9 @@
+import { Library } from "./Library";
+import { Adjunto } from "./Adjunto";
+
 export class Catalogo {
     idCat?: number;
     nombre: String;
-    idPdf: number;
+    biblioteca: Library;
+    adjunto: Adjunto;
  }

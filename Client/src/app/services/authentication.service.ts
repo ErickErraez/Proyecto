@@ -9,21 +9,19 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  url = environment.url + 'login/';
+  url = environment.url + 'user/';
   auth = {};
   constructor(private router: Router, private http: Http,private toastr: ToastrService) {
 
   }
 
   loginPerson(user?: String, password?: String) {
-    this.auth = { user: user, password: password };
+    this.auth = { user: user, password: password, userRol: { idRol: 2 } };
     this.http.post(this.url + 'userLogin', this.auth).toPromise().then(r => {
       this.toastr.success('Bienvenido a Intranet!', 'Logueado con Exito!');
       sessionStorage.setItem('isLoggedin', 'true');
+      sessionStorage.setItem('UserRol', r.json().userRol.descripcion);
       this.router.navigate(['/dashboard']);
-
-     
-
     }).catch(e => {
       this.toastr.error('Crendenciales Incorrectas!', 'Oops algo ha salido mal!');  
     });

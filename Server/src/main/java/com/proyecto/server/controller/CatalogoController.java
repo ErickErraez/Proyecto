@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.proyecto.server.model.Adjunto;
+import com.proyecto.server.model.Biblioteca;
 import com.proyecto.server.model.Catalogo;
 import com.proyecto.server.service.AdjuntoService;
+import com.proyecto.server.service.BibliotecaService;
 import com.proyecto.server.service.CatalogoService;
 
 @Controller
@@ -27,6 +29,8 @@ public class CatalogoController {
 	private CatalogoService _catalogoService;
 	@Autowired
 	private AdjuntoService _adjService;
+	@Autowired
+	private BibliotecaService _libService;
 
 	// Get Apps
 	@RequestMapping(value = "/getCat", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -45,7 +49,9 @@ public class CatalogoController {
 		if (cats.getNombre().equals(null) || cats.getNombre().isEmpty()) {
 			return new ResponseEntity("El Nombre es requerido", HttpStatus.CONFLICT);
 		}
-
+		if (_catalogoService.findByName(cats.getNombre()) != null) {
+			return new ResponseEntity("Ya existe", HttpStatus.CONFLICT);
+		}
 		_catalogoService.saveCatalogo(cats);
 
 		return new ResponseEntity<Catalogo>(cats, HttpStatus.CREATED);
@@ -69,10 +75,16 @@ public class CatalogoController {
 		if (adjs == null) {
 			return new ResponseEntity("No se Encontro", HttpStatus.CONFLICT);
 		}
+		Biblioteca bib = _libService.findById(cats.getBiblioteca().getIdBib());
+		if(bib == null) {
+			return new ResponseEntity("No se Encontro", HttpStatus.CONFLICT);
+		}
 		catsSaved.setAdjunto(adjs);
+		catsSaved.setBiblioteca(bib);
 		_catalogoService.updateCatalogo(catsSaved);
 
 		return new ResponseEntity<Catalogo>(catsSaved, HttpStatus.OK);
 	}
 
+	
 }

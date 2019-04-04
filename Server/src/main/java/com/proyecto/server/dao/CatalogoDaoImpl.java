@@ -5,10 +5,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.proyecto.server.model.Aplicaciones;
-import com.proyecto.server.model.Biblioteca;
 import com.proyecto.server.model.Catalogo;
-import com.proyecto.server.model.Usuarios;
 
 @Repository
 @Transactional
@@ -50,4 +47,14 @@ public class CatalogoDaoImpl extends AbstractSession implements CatalogoDao {
 		return getSession().createQuery("from Catalogo").list();
 	}
 
+	@Override
+	public Catalogo findByName(String nombre) {
+		// TODO Auto-generated method stub
+		return (Catalogo) getSession().createQuery(
+				"from Catalogo where nombre = :nombre")
+				.setParameter("nombre", nombre).uniqueResult();
+
+	}
+	
+	
 }

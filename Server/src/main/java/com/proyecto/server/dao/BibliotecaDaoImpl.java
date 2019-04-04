@@ -51,6 +51,14 @@ public class BibliotecaDaoImpl extends AbstractSession implements BibliotecaDao 
 		return getSession().get(Biblioteca.class, idBib);
 	}
 
+	@Override
+	public Biblioteca findByName(String nombre) {
+		// TODO Auto-generated method stub
+		return (Biblioteca) getSession().createQuery(
+				"from Biblioteca where nombre = :nombre")
+				.setParameter("nombre", nombre).uniqueResult();
+	}
+
 	
 	
 	

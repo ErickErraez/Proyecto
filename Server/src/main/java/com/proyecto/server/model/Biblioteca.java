@@ -27,10 +27,6 @@ public class Biblioteca implements Serializable{
 	@Column(name="nombre")
 	private String nombre;
 	
-	@ManyToOne(optional = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "idCat")
-	private Catalogo catalogo;
-	
 	
 
 	public Biblioteca() {
@@ -42,7 +38,6 @@ public class Biblioteca implements Serializable{
 	public Biblioteca(String nombre, String link, Catalogo catalogo) {
 		super();
 		this.nombre = nombre;
-		this.catalogo = catalogo;
 	}
 
 
@@ -64,21 +59,5 @@ public class Biblioteca implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
-	public Catalogo getCatalogo() {
-		return catalogo;
-	}
-
-
-	public void setCatalogo(Catalogo catalogo) {
-		this.catalogo = catalogo;
-	}
-	
-	
-
-
-
-	
 	
 }
