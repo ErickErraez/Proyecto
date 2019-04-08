@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { EventSesrvice } from './services/event.service';
+import { EnteratesComponent } from './layouts/enterates/enterates.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { EventSesrvice } from './services/event.service';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    EnteratesComponent,
   ],
   providers: [EventSesrvice],
   bootstrap: [AppComponent]

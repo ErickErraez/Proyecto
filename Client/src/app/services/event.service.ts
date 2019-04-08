@@ -1,24 +1,35 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {  } from 'rxjs';
+import { } from 'rxjs';
+import { Eventos } from 'app/Models/Events';
+import { Http } from '@angular/http';
+import { environment } from 'environments/environment';
 @Injectable()
 export class EventSesrvice {
-    public getEvents(fecharecibida,fechasalida,titulo): Observable<any> {
-        
-        const dateObj = new Date();
-        const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
-        let data: any = [
-        {
-            title: titulo,
-            start: fecharecibida,
-            end: fechasalida
-        },
-       
-        {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: yearMonth + '-28'
-        }];
-        return of(data);
+
+    data: any;
+
+    constructor(private http: Http) {
+    }
+
+    getEvents() {
+     return this.http.get(environment.url + 'event/getEvents').toPromise().then(e => {
+            this.data = e.json();
+            return this.data;
+        })
+    }
+
+    saveEvents(evento){
+        return this.http.post(environment.url + 'event/saveEvent' , evento).toPromise().then(e => {
+            this.data = e.json();
+            return this.data;
+        })
+    }
+
+    updateEvents(evento){
+        return this.http.put(environment.url + 'event/updateEvent/' +evento.idEvent , evento).toPromise().then(e => {
+            this.data = e.json();
+            return this.data;
+        })
     }
 }
