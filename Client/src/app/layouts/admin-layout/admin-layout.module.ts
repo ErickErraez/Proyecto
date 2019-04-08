@@ -2,31 +2,36 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { LbdModule } from '../../lbd/lbd.module';
-
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
 import { HomeComponent } from '../../home/home.component';
-import { UserComponent } from '../../user/user.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { ViewAppComponent } from 'app/view-app/view-app.component';
 import { UrlPipe } from 'app/pipes/url.pipe';
 import { LibraryComponent } from 'app/library/library.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { RolComponent } from '../rol/rol.component';
+import { FullCalendarModule } from 'ng-fullcalendar';
+import { EnteratesComponent } from '../enterates/enterates.component';
 
 
 @NgModule({
   imports: [
-    CommonModule,
+    
+    CommonModule, 
+    FullCalendarModule ,
+    NgbModule.forRoot(),
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    LbdModule,
 
   ],
   declarations: [
     HomeComponent,
+    RolComponent,
+    EnteratesComponent,
+    DashboardComponent,
     LibraryComponent,
-    UserComponent,
     IconsComponent,
     ViewAppComponent,
     UrlPipe,

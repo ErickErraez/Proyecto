@@ -1,0 +1,83 @@
+.ul-downloads,
+.ul-downloads ul {
+  list-style: none;
+}
+.ul-downloads ul {
+  display: block;
+}
+
+.ul-downloads li {
+  padding: 15px 0px 15px 0px;
+}
+.ul-downloads li.li-gray1 {
+  background: #fff;
+  margin-top: 10px;
+}
+.ul-downloads li.li-gray2 {
+  background: #e6e6e6;
+  margin-top: 10px;
+}
+
+.li-gray1 a,
+.li-gray1 a:active,
+.li-gray1 a:hover,
+.li-gray1 a:visited,
+.li-gray2 a,
+.li-gray2 a:active,
+.li-gray2 a:visited,
+.li-gray2 a:hover {
+  color: #666666;
+  font-weight: bold;
+  text-decoration: none;
+}
+.nested-menu {
+  .list-group-item {
+    cursor: pointer;
+  }
+  .nested {
+    list-style-type: none;
+  }
+  ul.submenu {
+    display: none;
+    height: 0;
+  }
+  & .expand {
+    ul.submenu {
+      display: block;
+      list-style-type: none;
+      height: 20px;
+      li {
+        a {
+          color: #fff;
+          padding: 0px;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.toggle-button {
+  position: fixed;
+  bottom: 0;
+}
+
+.posicionA {
+  margin-top: -15px;
+}
+
+.colorFondo {
+  background-color: green;
+}
+
+.tamañoBarra {
+  width: 200px;
+}
+
+.prueba:enabled {
+  color: #2b2;
+}
+
+.prueba:disabled {
+  color: #aaa;
+}

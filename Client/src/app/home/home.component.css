@@ -1,0 +1,17 @@
+.redondeado {
+  border-radius: 35px 35px 35px 35px;
+}
+.image-rounded{
+    border-radius: 150px 150px 150px 150px;
+}
+
+.appInterna{
+    background-color: #49baee61;
+    position: relative;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.appExterna{
+  background-color: #e9ebec;
+}

@@ -9,7 +9,7 @@
     </div>
     <ul class="nav responsive-nav nested-menu">
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
-            <a [routerLink]="[menuItem.path]">
+            <a [routerLink]="[menuItem.path]" *ngIf="menuItem.condition()">
                 <i class="{{menuItem.icon}}"></i>
                 <p>{{menuItem.title}}</p>
             </a>
@@ -18,7 +18,6 @@
             <a (click)="addExpandClass('pages5')">
                 <i class="fa fa-plus"></i>
                 <p>ARCHIVOS DESCARGABLES</p>
-
             </a>
         <li class="nested" [class.expand]="showMenu === 'pages5'">
             <ul class="submenu">
@@ -27,7 +26,15 @@
                         <span><i class="pe-7s-map-marker"></i></span>&nbsp;ARCHIVOS PARA DESCARGAR
                     </a>
                 </li>
+
             </ul>
         </li>
+        <li routerLinkActive="active" class="active-pro">
+            <a (click)="logOut()">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Cerrar Sesión</p>
+            </a>
+        </li>
     </ul>
+
 </div>

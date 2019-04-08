@@ -1,112 +1,126 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
-import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
-import * as Chartist from 'chartist';
-
+import { Adjunto } from 'app/Models/Adjunto';
+import { Http } from '@angular/http';
+import { environment } from 'environments/environment';
+import { Aplicacion } from 'app/Models/Aplicacion';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    public emailChartType: ChartType;
-    public emailChartData: any;
-    public emailChartLegendItems: LegendItem[];
 
-    public hoursChartType: ChartType;
-    public hoursChartData: any;
-    public hoursChartOptions: any;
-    public hoursChartResponsive: any[];
-    public hoursChartLegendItems: LegendItem[];
+  app: Aplicacion;
+  adj: Adjunto;
+  appInternas = [];
+  appExternas = [];
+  isNewApp = false;
+  adjs: any = [];
+  apps: any = [];
+  userRol = sessionStorage.getItem('UserRol');
+  appImage = {};
 
-    public activityChartType: ChartType;
-    public activityChartData: any;
-    public activityChartOptions: any;
-    public activityChartResponsive: any[];
-    public activityChartLegendItems: LegendItem[];
-  constructor() { }
+  attached: Adjunto;
+  srcFoto = 'assets/img/iepi.png';
+  @ViewChild('fileInput') fileInput;
+
+  constructor(private modalService: NgbModal, private http: Http, private toastr: ToastrService) {
+    this.app = new Aplicacion();
+    this.adj = new Adjunto();
+    this.attached = new Adjunto();
+    this.getData();
+  }
 
   ngOnInit() {
-      this.emailChartType = ChartType.Pie;
-      this.emailChartData = {
-        labels: ['62%', '32%', '6%'],
-        series: [62, 32, 6]
-      };
-      this.emailChartLegendItems = [
-        { title: 'Open', imageClass: 'fa fa-circle text-info' },
-        { title: 'Bounce', imageClass: 'fa fa-circle text-danger' },
-        { title: 'Unsubscribe', imageClass: 'fa fa-circle text-warning' }
-      ];
 
-      this.hoursChartType = ChartType.Line;
-      this.hoursChartData = {
-        labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-        series: [
-          [287, 385, 490, 492, 554, 586, 698, 695, 752, 788, 846, 944],
-          [67, 152, 143, 240, 287, 335, 435, 437, 539, 542, 544, 647],
-          [23, 113, 67, 108, 190, 239, 307, 308, 439, 410, 410, 509]
-        ]
+  }
+
+  CodificarArchivo(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.attached.nombreArchivo = file.name;
+        this.attached.tipoArchivo = file.type;
+        this.attached.adjuntoArchivo = reader.result.toString().split(',')[1];
+        this.srcFoto = 'data:' + this.attached.tipoArchivo + ';base64,' + this.attached.adjuntoArchivo;
       };
-      this.hoursChartOptions = {
-        low: 0,
-        high: 800,
-        showArea: true,
-        height: '245px',
-        axisX: {
-          showGrid: false,
-        },
-        lineSmooth: Chartist.Interpolation.simple({
-          divisor: 3
-        }),
-        showLine: false,
-        showPoint: false,
-      };
-      this.hoursChartResponsive = [
-        ['screen and (max-width: 640px)', {
-          axisX: {
-            labelInterpolationFnc: function (value) {
-              return value[0];
-            }
+    }
+  }
+
+  saveApps() {
+    if (this.srcFoto == "assets/img/iepi.png") {
+      this.toastr.error('Debe cambiar la imagen!', 'Oops algo ha salido mal!');
+    }
+    if (this.app.nombre === undefined || this.app.tipo === undefined || this.app.link === undefined || this.app.tipo === 'Seleccione') {
+      this.toastr.error('Debes completar todos los campos!', 'Oops algo ha salido mal!');
+    } else {
+      this.http.post(environment.url + 'adjunto/saveAdjs', this.attached).toPromise().then(image => {
+        this.http.post(environment.url + 'aplications/saveApp', this.app).toPromise().then(app => {
+          this.appImage = {
+            idApp: app.json().idApp, adjunto: { idAdj: image.json().idAdj }
           }
-        }]
-      ];
-      this.hoursChartLegendItems = [
-        { title: 'Open', imageClass: 'fa fa-circle text-info' },
-        { title: 'Click', imageClass: 'fa fa-circle text-danger' },
-        { title: 'Click Second Time', imageClass: 'fa fa-circle text-warning' }
-      ];
+          this.http.put(environment.url + 'aplications/apps/adjs', this.appImage).toPromise().then(res => {
+            this.toastr.success('La Aplicacion!', 'Se ha guardado con exito!');
+            this.appExternas = [];
+            this.appInternas = [];
+            this.Cancelar();
+            this.getData();
+          }).catch(err => {
+            console.log(err.json());
+          });
+        }).catch(errorA => {
 
-      this.activityChartType = ChartType.Bar;
-      this.activityChartData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        series: [
-          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-          [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-        ]
-      };
-      this.activityChartOptions = {
-        seriesBarDistance: 10,
-        axisX: {
-          showGrid: false
-        },
-        height: '245px'
-      };
-      this.activityChartResponsive = [
-        ['screen and (max-width: 640px)', {
-          seriesBarDistance: 5,
-          axisX: {
-            labelInterpolationFnc: function (value) {
-              return value[0];
-            }
-          }
-        }]
-      ];
-      this.activityChartLegendItems = [
-        { title: 'Tesla Model S', imageClass: 'fa fa-circle text-info' },
-        { title: 'BMW 5 Series', imageClass: 'fa fa-circle text-danger' }
-      ];
-
+        });
+      }).catch(errorI => {
+        console.log();
+      });
 
     }
+  }
+
+  Cancelar() {
+    this.isNewApp = false;
+    if (this.app.nombre !== undefined || this.app.tipo !== undefined || this.app.link !== undefined || this.srcFoto !== "assets/img/iepi.png") {
+      this.app.nombre = "";
+      this.app.link = "";
+      this.app.tipo = "Seleccione";
+      this.srcFoto = "assets/img/iepi.png";
+    }
+  }
+
+  getData() {
+
+    this.http.get(environment.url + 'adjunto/getAdjs').toPromise().then(r => {
+      this.adjs = r.json();
+    }).catch(e => {
+      console.log(e);
+    });
+
+    this.http.get(environment.url + 'aplications/getApps').toPromise().then(r => {
+
+      for (var i = 0; i < r.json().length; i++) {
+        if (r.json()[i].tipo == 'Interna') {
+          this.appInternas.push(r.json()[i]);
+        } else {
+          this.appExternas.push(r.json()[i]);
+        }
+      }
+    }).catch(e => {
+      console.log(e);
+    });
+  }
+
+  checkRol(){
+    if(this.userRol == 'Administrador' || this.userRol == 'Escritura'){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 }

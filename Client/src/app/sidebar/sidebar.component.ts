@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -6,13 +7,27 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  condition(): boolean;
+
 }
+
 export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Aplicaciones', icon: 'pe-7s-keypad', class: '' },
-  { path: '/library', title: 'Biblioteca  Digital', icon: 'pe-7s-notebook', class: '' },
-  { path: '/icons', title: 'Icons', icon: 'pe-7s-science', class: '' },
-  //{ path: '/notifications', title: 'Notifications', icon: 'pe-7s-bell', class: '' },
+  { path: '/aplication', title: 'Aplicaciones', icon: 'pe-7s-keypad', class: '', condition() { return true } },
+  { path: '/library', title: 'Biblioteca  Digital', icon: 'pe-7s-notebook', class: '', condition() { return true } },
+  { path: '/icons', title: 'Icons', icon: 'pe-7s-science', class: '', condition() { return true } },
+  { path: '/view', title: 'Eventos', icon: 'pe-7s-date', class: '', condition() { return true } },
+  { path: '/enterate', title: 'Enterates', icon: 'pe-7s-gift', class: '', condition() { return true } },
+  {
+    path: '/rol', title: 'Aignar Rol', icon: 'pe-7s-id', class: '', condition() {
+      var userRol = sessionStorage.getItem('UserRol');
+      if (userRol === 'Administrador') {
+        return true;
+      }
+      return false;
+    }
+  },
 ];
+
 
 @Component({
   selector: 'app-sidebar',
@@ -22,10 +37,14 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   showMenu = '';
-  constructor() { }
+
+  constructor(private router: Router) {
+    this.menuItems = ROUTES.filter(menuItem => menuItem);
+  }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+
+
   }
   isMobileMenu() {
     if ($(window).width() > 991) {
@@ -40,4 +59,14 @@ export class SidebarComponent implements OnInit {
       this.showMenu = element;
     }
   }
+
+  logOut() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
+  refresh() {
+
+  }
+
 }

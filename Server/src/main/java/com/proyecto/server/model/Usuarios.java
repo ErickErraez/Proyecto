@@ -4,14 +4,17 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name="users")
+@Table(name="suario")
 public class Usuarios implements Serializable{
 	
 	@Id
@@ -19,46 +22,38 @@ public class Usuarios implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idUser;
 	
-	@Column(name="cedula")
-	private String cedula;
+	@Column(name="userName")
+	private String user;
 	
-	@Column(name="nombre")
-	private String nombre;
+	@Column(name="userPassword")
+	private String password;
 	
-	@Column(name="apellido")
-	private String apellido;
-	
-	
-	public Long getIdUser() {
-		return idUser;
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idRol")
+	private UserRol userRol;
+
+	public String getUser() {
+		return user;
 	}
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
-	public String getCedula() {
-		return cedula;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public UserRol getUserRol() {
+		return userRol;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setUserRol(UserRol userRol) {
+		this.userRol = userRol;
 	}
 
 

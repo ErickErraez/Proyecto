@@ -23,14 +23,18 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/assets/sass/light-bootstrap-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "src/assets/css/fullcalendar.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js",
-              "node_modules/chartist/dist/chartist.js"
+              "node_modules/chartist/dist/chartist.js",
+              "node_modules/moment/moment.js",
+              "node_modules/fullcalendar/dist/fullcalendar.min.js"
             ]
           },
           "configurations": {
@@ -80,7 +84,9 @@
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js",
-              "node_modules/chartist/dist/chartist.js"
+              "node_modules/chartist/dist/chartist.js",
+              "node_modules/moment/moment.js",
+              "node_modules/fullcalendar/dist/fullcalendar.min.js"
             ],
             "styles": [
               "node_modules/animate.css/animate.min.css",
