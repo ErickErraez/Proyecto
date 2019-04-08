@@ -8,6 +8,7 @@ import { ViewAppComponent } from 'app/view-app/view-app.component';
 import { LibraryComponent } from 'app/library/library.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { RolComponent } from '../rol/rol.component';
+import { EnteratesComponent } from '../enterates/enterates.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent},
@@ -15,6 +16,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'library', component: LibraryComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'view', component: ViewAppComponent },
+    { path: 'enterate', component: EnteratesComponent },
     { path: 'rol', component: RolComponent },
     { path: '', redirectTo: 'dashboard' },
 ];

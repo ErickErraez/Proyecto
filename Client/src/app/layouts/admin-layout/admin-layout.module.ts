@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { RolComponent } from '../rol/rol.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
+import { EnteratesComponent } from '../enterates/enterates.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { FullCalendarModule } from 'ng-fullcalendar';
   declarations: [
     HomeComponent,
     RolComponent,
+    EnteratesComponent,
     DashboardComponent,
     LibraryComponent,
     IconsComponent,
