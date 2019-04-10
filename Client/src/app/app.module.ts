@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,9 @@ import { LoginComponent } from './login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { EventSesrvice } from './services/event.service';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(es);
 
 @NgModule({
   imports: [
@@ -36,7 +39,7 @@ import { EventSesrvice } from './services/event.service';
     AdminLayoutComponent,
     LoginComponent,
   ],
-  providers: [EventSesrvice],
+  providers: [EventSesrvice,{ provide: LOCALE_ID, useValue: "es-ES" },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
