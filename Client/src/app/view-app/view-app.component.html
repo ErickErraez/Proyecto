@@ -15,11 +15,16 @@
                 <div class="content">
                   <form>
                     <div class="row">
-                      <div class="col-md-7">
+                      <div class="col-md-12">
+                          <label for="formGroupExampleInput">Ingrese el Titulo del evento:</label><br>
+                        <input type="text" class="form-control" id="birthdate" [(ngModel)]="evento.title"
+                          name="title"><br>
+                          <label for="formGroupExampleInput">Ingrese la fecha de Inicio:</label><br>
                         <input type="date" class="form-control" id="birthdate" [(ngModel)]="evento.start" name="start">
                         <br>
+                        <label for="formGroupExampleInput">Ingrese  la fecha de Finalizacion:</label><br>
                         <input type="date" class="form-control" id="birthdate" [(ngModel)]="evento.end" name="end"> <br>
-                        <input type="text" class="form-control" id="birthdate" [(ngModel)]="evento.title" name="title">
+
                         <button type="button" class="btn btn-primary btn-fill" (click)="saveEvent()">
                           <span class="fa fa-save"></span>&nbsp;Guardar
                         </button>
@@ -39,7 +44,8 @@
         </ng-container>
         <br> <br>
         <div *ngIf="calendarOptions">
-          <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events" (eventClick)="eventClick($event.detail)">
+          <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events"
+            (eventClick)="eventClick($event.detail)">
           </ng-fullcalendar>
         </div>
       </div>

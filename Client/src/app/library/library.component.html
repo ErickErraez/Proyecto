@@ -72,10 +72,10 @@
                     <button type="button" class="btn btn-warning" (click)="agregarBiblioteca()">Nueva Seccion</button>
                     <button type="button" class="btn btn-primary" (click)="agregarArchivo()">Agregar Archivo</button>
                 </ng-container>
-                <ng-container *ngFor="let item of libraries">
+                <ng-container *ngFor="let item of libraries; let i=index;">
 
                     <ul class="ul-downloads nested-menu">
-                        <li [ngClass]=" typeClass(item.idBib) ? 'li-gray2' : 'li-gray1'">
+                        <li [ngClass]=" typeClass(i) ? 'li-gray2' : 'li-gray1'">
                             <a class="active" (click)="addExpandClass(item.idBib)">
                                 <i class="fas fa-plus" *ngIf="showMenu !== item.idBib"></i> <i class="fas fa-minus"
                                     *ngIf="showMenu === item.idBib"></i>
@@ -88,12 +88,12 @@
                                     <span class="ico"><i class="fas fa-angle-double-right"></i></span>
                                     {{cat.nombre}}
                                     <div class="text-right posicionA">
-                                        <a (click)="showPdf(cat.adjunto.nombreArchivo,cat.adjunto.adjuntoArchivo)">
+                                        <a (click)="showPdf(cat.nombre,cat.adjunto.adjuntoArchivo)">
                                             <b> Ver</b>
                                         </a>
                                         &nbsp;
                                         <a
-                                            (click)="downloadPdf(cat.adjunto.nombreArchivo,cat.adjunto.tipoArchivo,cat.adjunto.adjuntoArchivo)">
+                                            (click)="downloadPdf(cat.nombre,cat.adjunto.tipoArchivo,cat.adjunto.adjuntoArchivo)">
                                             <b> Descargar</b>
                                         </a>
                                         &nbsp;

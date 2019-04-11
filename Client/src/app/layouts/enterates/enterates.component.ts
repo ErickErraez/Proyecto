@@ -49,7 +49,6 @@ export class EnteratesComponent implements OnInit {
   getData() {
     this.enterateServices.getEnterates().then(r => {
       this.enterates = r;
-      console.log(r);
     }).catch(e => {
 
     });
@@ -57,7 +56,6 @@ export class EnteratesComponent implements OnInit {
 
   typeClass(id) {
     var numero = parseInt(id);
-    console.log(id);
     if (numero % 2 == 0) {
       return true;
     }

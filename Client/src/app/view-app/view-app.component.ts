@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { EventSesrvice } from 'app/services/event.service';
 import { Eventos } from 'app/Models/Events';
 import { type } from 'os';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-view-app',
@@ -24,7 +25,7 @@ export class ViewAppComponent implements OnInit {
   userRol = sessionStorage.getItem('UserRol');
   events = null;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  constructor(protected eventService: EventSesrvice) {
+  constructor(protected eventService: EventSesrvice, private toastr: ToastrService) {
 
     this.calendarOptions = {
       editable: true,
@@ -52,10 +53,9 @@ export class ViewAppComponent implements OnInit {
       this.evento.start = this.evento.start + ' 00:00:00'
       this.evento.end = this.evento.end + ' 23:00:00';
       this.eventService.saveEvents(this.evento).then(data => {
-        this.loadevents();
-        this.evento = new Eventos();
+        this.guardado();
       }).catch(e => {
-
+        this.toastr.error('Intentalo de nuevo!', 'Oops algo ha salido mal!');
       });
     } else {
      
@@ -64,9 +64,9 @@ export class ViewAppComponent implements OnInit {
         this.evento.end = this.evento.end + ' 23:00:00';
       }
       this.eventService.updateEvents(this.evento).then(event => {
-        this.loadevents(); this.cancel();
+        this.guardado();
       }).catch(r => {
-
+        this.toastr.error('Intentalo de nuevo!', 'Oops algo ha salido mal!');
       });
     }
 
@@ -96,6 +96,12 @@ export class ViewAppComponent implements OnInit {
     this.evento.end = model.event.end._i;
     this.evento.title = model.event.title;
     this.evento.idEvent = model.event.idEvent;
+  }
+
+  guardado() {
+    this.toastr.success(' Se han guardado con exito!', 'Todos los Datos!');
+    this.cancel();
+    this.loadevents();
   }
 
 }
