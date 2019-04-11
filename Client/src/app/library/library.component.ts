@@ -146,10 +146,10 @@ export class LibraryComponent implements OnInit {
   typeClass(id) {
     var numero = parseInt(id);
     if (numero % 2 == 0) {
-      return false;
+      return true;
     }
     else {
-      return true;
+      return false;
     }
   }
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID,NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +36,7 @@ import { EnteratesComponent } from '../enterates/enterates.component';
     ViewAppComponent,
     UrlPipe,
   ]
+ 
 })
 
 export class AdminLayoutModule {}

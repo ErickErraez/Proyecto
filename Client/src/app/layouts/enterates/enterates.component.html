@@ -1,25 +1,65 @@
 <div class="main-content">
   <div class="container-fluid">
+    <div class="row" *ngIf="isNewEnterate">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h3 class="title">Agregar Enterates</h3>
+            <label>Ingreso de Enterates</label>
+          </div>
+          <div class="content">
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <b>
+                      <label for="formGroupExampleInput">Ingrese el Titulo:</label>
+                      <input name="nombre" [(ngModel)]="this.enterate.titulo" type="text" class="form-control" id="name"
+                        placeholder="Ingrese Nombre">
+                    </b>
+                    <br>
+                    <b>
+                      <label for="formGroupExampleInput">Ingresa la Fecha:</label>
+                      <input name="link" [(ngModel)]="this.enterate.fecha" type="date" class="form-control" id="name">
+                    </b>
+                    <br>
+
+                  </div>
+                  <button type="submit" (click)="agregarEnterate()" class="btn btn-primary">Enviar</button>
+                  <button type="submit" (click)="Cancelar()" class="btn btn-danger">Cancelar</button>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <img (click)="fileInput.click()" class="card-img fotoPerfilPortada redondeado altura" src="{{srcFoto}}"
+                    width="410" height="310px" />
+                  <input hidden=true type="file" style="display: none;" #fileInput (change)="CodificarArchivo($event)"
+                    accept="image/*">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
+      <ng-container *ngIf="checkRol()">
+        <button type="button" class="btn btn-primary" (click)="isNewEnterate = true">Agregar Archivo</button>
+      </ng-container>
       <div class="col-md-12">
         <div class="card-body">
           <ul class="timeline">
-            <li>
-              <div class="timeline-badge warning"><i class="fas fa-award"></i>
-              </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                  <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via Twitter</small>
-                  </p>
+            <ng-container *ngFor="let ent of enterates; let i=index;">
+              <li [ngClass]=" typeClass(i) ? '' : 'timeline-inverted'">
+                <div class="timeline-badge warning"><i class="fas fa-award"></i>
                 </div>
-                <div class="timeline-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis
-                    omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro
-                    voluptas suscipit facere rem dicta, debitis.</p>
+                <div class="timeline-panel">
+
+                  <h5 class="timeline-title">{{ent.titulo}}<br> <span class="posicionRigth">{{ent.fecha | date | uppercase }}</span></h5>
+                  <img class="redondeado" src="data:{{ent.adjunto.tipoArchivo}};base64,{{ent.adjunto.adjuntoArchivo}}"
+                    width="435px" height="355px">
                 </div>
-              </div>
-            </li>
+              </li>
+            </ng-container>
           </ul>
         </div>
       </div>

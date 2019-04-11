@@ -7,7 +7,7 @@
             <p><span class="fa fa-user"></span><input type="text" [(ngModel)]="user" name="user"
                 Placeholder="Ingresar Usuario" required></p>
             <p><span class="fa fa-lock"></span><input type="password" [(ngModel)]="password" name="password"
-                Placeholder="Ingresar Contraseña" required></p>
+                Placeholder="Ingresar Contraseña"(keyup.enter)="login()" required></p>
             <br>
             <div class="alineacion">
               <a class="btn rounded-btn" (click)="login()">Iniciar Sesion</a>
@@ -21,7 +21,7 @@
       <div class="logo">
         <img src="assets/img/iepi.png" width="150px" height="130px;">
         <div class="logo-texto">
-            SENADI
+          SENADI
         </div>
         <div class="clearfix"></div>
       </div>

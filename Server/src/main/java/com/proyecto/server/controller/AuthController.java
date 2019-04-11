@@ -95,7 +95,7 @@ public class AuthController {
 		}
 
 	}
-	
+
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET, headers = "Accept=application/json")
 	public ResponseEntity<List<AuthModel>> getApps() {
 		List<AuthModel> users = new ArrayList<AuthModel>();
@@ -104,13 +104,11 @@ public class AuthController {
 		return new ResponseEntity<List<AuthModel>>(users, HttpStatus.OK);
 
 	}
-	
-	
 
 	@RequestMapping(value = "/userChangeRol", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<AuthModel> assignAplicacionesToImage(@RequestBody AuthModel user,
 			UriComponentsBuilder ucBuilder) {
-		
+
 		if (user.getIdUser() == null || user.getUserRol().getIdRol() == null) {
 			return new ResponseEntity("Faltan Datos", HttpStatus.CONFLICT);
 		}
@@ -127,27 +125,10 @@ public class AuthController {
 		return new ResponseEntity<AuthModel>(user, HttpStatus.CREATED);
 
 	}
-	
 
 	public static String getMD5(String input) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] messageDigest = md.digest(input.getBytes());
-			BigInteger number = new BigInteger(1, messageDigest);
-			String hashtext = number.toString(16);
-
-			while (hashtext.length() < 32) {
-				hashtext = "0" + hashtext;
-			}
-			return hashtext;
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static String getSHA(String input) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			byte[] messageDigest = md.digest(input.getBytes());
 			BigInteger number = new BigInteger(1, messageDigest);
 			String hashtext = number.toString(16);
