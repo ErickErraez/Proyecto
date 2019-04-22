@@ -28,6 +28,12 @@ public class Events implements Serializable{
 	
 	@Column(name="title")
 	private String title;
+	
+	@Column(name="tipo")
+	private String tipo;
+	 
+	@Column(name="backgroundColor")
+	private String backgroundColor;
 
 	@Column(name="start") 
 	private String start;
@@ -65,8 +71,27 @@ public class Events implements Serializable{
 	}
 
 
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+
+
+	public void setBackground(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+
+
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 

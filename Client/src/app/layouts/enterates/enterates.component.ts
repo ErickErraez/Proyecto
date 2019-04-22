@@ -16,15 +16,21 @@ export class EnteratesComponent implements OnInit {
   enterates = [];
   isNewEnterate = false;
   enterate: Enterate;
+  idEnterate: Enterate;
   userRol = sessionStorage.getItem('UserRol');
   attached: Adjunto;
+  atachHome: Adjunto;
   srcFoto = 'assets/img/iepi.png';
+  srcHome = 'assets/img/iepi.png';
   @ViewChild('fileInput') fileInput;
+  @ViewChild('fileHome') fileHome;
 
   constructor(private enterateServices: EnterateService, private http: Http, private toastr: ToastrService) {
     this.getData();
     this.enterate = new Enterate();
     this.attached = new Adjunto();
+    this.atachHome = new Adjunto();
+    this.idEnterate = new Enterate();
   }
 
   ngOnInit() {
@@ -42,6 +48,20 @@ export class EnteratesComponent implements OnInit {
         this.attached.tipoArchivo = file.type;
         this.attached.adjuntoArchivo = reader.result.toString().split(',')[1];
         this.srcFoto = 'data:' + this.attached.tipoArchivo + ';base64,' + this.attached.adjuntoArchivo;
+      };
+    }
+  }
+
+  CodificarArchivoHome(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.atachHome.nombreArchivo = file.name;
+        this.atachHome.tipoArchivo = file.type;
+        this.atachHome.adjuntoArchivo = reader.result.toString().split(',')[1];
+        this.srcHome = 'data:' + this.atachHome.tipoArchivo + ';base64,' + this.atachHome.adjuntoArchivo;
       };
     }
   }
@@ -84,9 +104,19 @@ export class EnteratesComponent implements OnInit {
         this.enterate = r;
         this.http.post(environment.url + 'adjunto/saveAdjs', this.attached).toPromise().then(res => {
           this.enterate.adjunto = res.json();
-          this.http.put(environment.url + 'enterates/ent/adjs', this.enterate).toPromise().then(re => {
-            this.guardado();
-          }).catch(err => {
+          this.http.post(environment.url + 'adjunto/saveAdjs', this.atachHome).toPromise().then(at => {
+            this.enterate.home = at.json();
+            this.http.put(environment.url + 'enterates/ent/adjs', this.enterate).toPromise().then(re => {
+              this.http.put(environment.url + 'enterates/ent/home', this.enterate).toPromise().then(responseAt => {
+                this.guardado();
+              }).catch(aterror => {
+
+              });
+
+            }).catch(err => {
+
+            });
+          }).catch(atE => {
 
           });
         }).catch(er => {
@@ -111,5 +141,26 @@ export class EnteratesComponent implements OnInit {
     this.getData();
   }
 
+  getLastId() {
+    this.enterateServices.getLastId().then(r => {
+      this.idEnterate = r;
+    }).catch(e => {
 
+    });
+  }
+
+  showEnterate(nombreArchivo, archivoAdjunto) {
+
+    var objbuilder = '';
+    objbuilder += ('<img width="600px" height="auto"  src="data:image/*;base64,');
+    objbuilder += (archivoAdjunto);
+    objbuilder += ('"type="image/*">');
+
+    var win = window.open();
+    var title = nombreArchivo;
+    win.document.write('<html><title>' + title + '</title><body style="text-align:center;">');
+    win.document.write(objbuilder);
+    win.document.write('</body></html>');
+
+  }
 }

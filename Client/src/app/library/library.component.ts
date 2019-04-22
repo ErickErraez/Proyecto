@@ -83,7 +83,7 @@ export class LibraryComponent implements OnInit {
     objbuilder += (archivoAdjunto);
     objbuilder += ('" type="application/pdf"  >');
 
-    var win = window.open("#", "_blank");
+    var win = window.open();
     var title = nombreArchivo;
     win.document.write('<html><title>' + title + '</title><body style="margin-top:0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">');
     win.document.write(objbuilder);

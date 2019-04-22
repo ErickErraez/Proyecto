@@ -1,11 +1,14 @@
 package com.proyecto.server.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.proyecto.server.model.Aplicaciones;
+import com.proyecto.server.model.Biblioteca;
 import com.proyecto.server.model.Enterates;
 import com.proyecto.server.model.Usuarios;
 
@@ -42,13 +45,27 @@ public class EnteratesDaoImpl extends AbstractSession implements EnteratesDao {
 		// TODO Auto-generated method stub
 		return getSession().get(Enterates.class, idEnt);
 	}
+	
+	
+
+	@Override
+	public Enterates findLastId() {
+		// TODO Auto-generated method stub
+		return  (Enterates) getSession().createQuery("from Enterates order by idEnt desc").uniqueResult();
+	}
 
 	@Override
 	public List<Enterates> findAllEnterates() {
-		return getSession().createQuery("from Enterates order by fecha desc").list();
+		return getSession().createQuery("from Enterates order by idEnt desc").list();
 	}
 
-	
-	
-	
+	@Override
+	public List<Enterates> findAllActual() {
+		// TODO Auto-generated method stub
+		Date objDate = new Date(); 
+		 SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-MM-dd");  
+		return  getSession().createQuery("from Enterates  where fecha = :fecha")
+				.setParameter("fecha", objSDF.format(objDate)).list();
+	}
+
 }

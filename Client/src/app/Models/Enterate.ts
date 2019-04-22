@@ -5,4 +5,5 @@ export class Enterate {
     titulo: String;
     fecha: String;
     adjunto: Adjunto;
+    home: Adjunto;
  }

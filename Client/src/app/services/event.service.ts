@@ -19,6 +19,14 @@ export class EventSesrvice {
         })
     }
 
+    getEnterateActual() {
+        return this.http.get(environment.url + 'event/getActual').toPromise().then(r => {
+          return r.json();
+        }).catch(e => {
+          return e.body;
+        });
+      }
+
     saveEvents(evento){
         return this.http.post(environment.url + 'event/saveEvent' , evento).toPromise().then(e => {
             this.data = e.json();

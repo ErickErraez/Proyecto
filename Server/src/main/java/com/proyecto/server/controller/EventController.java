@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.proyecto.server.model.Adjunto;
+import com.proyecto.server.model.Enterates;
 import com.proyecto.server.model.Events;
 import com.proyecto.server.model.UserRol;
 import com.proyecto.server.service.AdjuntoService;
@@ -57,6 +58,15 @@ public class EventController {
 
 	}
 
+	@RequestMapping(value = "/getActual", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ResponseEntity<List<Events>> getEventsActual() {
+		List<Events> events = new ArrayList<Events>();
+
+		events = _eventService.findAllActual();
+		return new ResponseEntity<List<Events>>(events, HttpStatus.OK);
+
+	}
+	
 	// Update Event
 	@RequestMapping(value = "/updateEvent/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events event) {

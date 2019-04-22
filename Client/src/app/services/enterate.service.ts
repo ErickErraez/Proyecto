@@ -35,4 +35,20 @@ export class EnterateService {
     });
   }
 
+  getEnterateActual() {
+    return this.http.get(environment.url + 'enterates/getActual').toPromise().then(r => {
+      return r.json();
+    }).catch(e => {
+      return e.body;
+    });
+  }
+
+  getLastId() {
+    return this.http.get(environment.url + 'enterates/getLastId').toPromise().then(r => {
+      return r.json();
+    }).catch(e => {
+      return e.body;
+    });
+  }
+
 }

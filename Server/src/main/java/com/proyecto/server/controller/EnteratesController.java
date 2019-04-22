@@ -43,14 +43,32 @@ public class EnteratesController {
 
 	}
 
+	@RequestMapping(value = "/getActual", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ResponseEntity<List<Enterates>> getEnteratesActual() {
+		List<Enterates> enterates = new ArrayList<Enterates>();
+
+		enterates = _enteratesService.findAllActual();
+		return new ResponseEntity<List<Enterates>>(enterates, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/getLastId", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ResponseEntity<Enterates> getLastId() {
+		Enterates enterates = new Enterates();
+
+		enterates = _enteratesService.findLastId();
+		return new ResponseEntity<Enterates>(enterates, HttpStatus.OK);
+
+	}
+
 	// Save User
 	@RequestMapping(value = "/saveEnterates", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ResponseEntity<?> createApp(@RequestBody Enterates enterates, UriComponentsBuilder uriComponentsBuilder) {
 
-		if (enterates.getTitulo().equals(null) ||enterates.getTitulo().isEmpty()) {
+		if (enterates.getTitulo().equals(null) || enterates.getTitulo().isEmpty()) {
 			return new ResponseEntity("El Nombre es requerido", HttpStatus.CONFLICT);
 		}
-
+		enterates.setTipo("enterate");
 		_enteratesService.saveEnterates(enterates);
 
 		return new ResponseEntity<Enterates>(enterates, HttpStatus.CREATED);
@@ -62,8 +80,8 @@ public class EnteratesController {
 	@RequestMapping(value = "/ent/adjs", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<Enterates> assignEnteratesToImage(@RequestBody Enterates ents,
 			UriComponentsBuilder ucBuilder) {
-		
-		if ( ents.getIdEnt() == null ||  ents.getAdjunto().getIdAdj() == null) {
+
+		if (ents.getIdEnt() == null || ents.getAdjunto().getIdAdj() == null) {
 			return new ResponseEntity("Faltan Datos", HttpStatus.CONFLICT);
 		}
 		Enterates entSaved = _enteratesService.findById(ents.getIdEnt());
@@ -80,6 +98,25 @@ public class EnteratesController {
 		return new ResponseEntity<Enterates>(entSaved, HttpStatus.OK);
 	}
 	
-	
+	@RequestMapping(value = "/ent/home", method = RequestMethod.PUT, headers = "Accept=application/json")
+	public ResponseEntity<Enterates> assignEnteratesToHome(@RequestBody Enterates ents,
+			UriComponentsBuilder ucBuilder) {
+
+		if (ents.getIdEnt() == null || ents.getHome().getIdAdj() == null) {
+			return new ResponseEntity("Faltan Datos", HttpStatus.CONFLICT);
+		}
+		Enterates entSaved = _enteratesService.findById(ents.getIdEnt());
+		if (entSaved == null) {
+			return new ResponseEntity("No se Encontro", HttpStatus.CONFLICT);
+		}
+		Adjunto adjs = _adjService.findById(ents.getHome().getIdAdj());
+		if (adjs == null) {
+			return new ResponseEntity("No se Encontro", HttpStatus.CONFLICT);
+		}
+		entSaved.setHome(adjs);
+		_enteratesService.updateEnterates(entSaved);
+
+		return new ResponseEntity<Enterates>(entSaved, HttpStatus.OK);
+	}
 
 }

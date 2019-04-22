@@ -1,11 +1,14 @@
 package com.proyecto.server.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.proyecto.server.model.AuthModel;
+import com.proyecto.server.model.Enterates;
 import com.proyecto.server.model.Events;
 import com.proyecto.server.model.UserRol;
 import com.proyecto.server.model.Usuarios;
@@ -57,6 +60,15 @@ public class EventDaoImpl extends AbstractSession implements EventDao {
 		return (Events) getSession().createQuery(
 				"from Events where title = :title")
 				.setParameter("title", title).uniqueResult();
+	}
+	
+	@Override
+	public List<Events> findAllActual() {
+		// TODO Auto-generated method stub
+		Date objDate = new Date(); 
+		 SimpleDateFormat objSDF = new SimpleDateFormat("yyyy-MM-dd");  
+		return  getSession().createQuery("from Events  where start = :start")
+				.setParameter("start", objSDF.format(objDate)).list();
 	}
 	
 	

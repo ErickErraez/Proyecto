@@ -1,0 +1,26 @@
+.carousel-inner img {
+  width: 100%;
+  max-height: 475px;
+}
+
+.carousel-inner{
+height: 475px;
+}
+
+.carousel-caption {
+  color: rgb(0, 0, 0);
+  font-size: 50px;
+}
+.carousel-indicators li{
+  background-color: black;
+}
+
+.carousel-control{
+    color: black;
+}
+
+section.awSlider .carousel {
+  -moz-box-shadow: 0 0 4px rgb(0, 0, 0);
+  -webkit-box-shadow: 0 0 4px rgb(0, 0, 0);
+  box-shadow: 0 0 15px rgba(1, 1, 1, 0.5);
+}

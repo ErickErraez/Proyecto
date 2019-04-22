@@ -55,4 +55,11 @@ public class EventServiceImpl implements EventService {
 		return _eventDao.findAllUsers();
 	}
 
+	@Override
+	public List<Events> findAllActual() {
+		// TODO Auto-generated method stub
+		return _eventDao.findAllActual();
+	}
+
+	
 }

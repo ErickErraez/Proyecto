@@ -1,6 +1,6 @@
 <div class="sidebar-wrapper">
     <div class="logo">
-        <a class="simple-text">
+        <a class="simple-text" [routerLink]="['/dashboard']">
             <div class="logo-img">
                 <img src="/assets/img/iepi.png" />
             </div>
@@ -14,21 +14,7 @@
                 <p>{{menuItem.title}}</p>
             </a>
         </li>
-        <li routerLinkActive="active" class="">
-            <a (click)="addExpandClass('pages5')">
-                <i class="fa fa-plus"></i>
-                <p>ARCHIVOS DESCARGABLES</p>
-            </a>
-        <li class="nested" [class.expand]="showMenu === 'pages5'">
-            <ul class="submenu">
-                <li routerLinkActive="active">
-                    <a>
-                        <span><i class="pe-7s-map-marker"></i></span>&nbsp;ARCHIVOS PARA DESCARGAR
-                    </a>
-                </li>
 
-            </ul>
-        </li>
         <li routerLinkActive="active" class="active-pro">
             <a (click)="logOut()">
                 <i class="fas fa-sign-out-alt"></i>

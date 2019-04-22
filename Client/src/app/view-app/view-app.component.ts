@@ -49,7 +49,14 @@ export class ViewAppComponent implements OnInit {
 
   }
   saveEvent() {
+    if (this.evento.tipo === 'cumpleanos') {
+      this.evento.backgroundColor = 'rgba(248,80,50,1)';
+    }
+    if (this.evento.tipo === 'evento') {
+      this.evento.backgroundColor = 'rgba(72,156,234,1)';
+    }
     if (this.evento.idEvent == undefined) {
+
       this.evento.start = this.evento.start + ' 00:00:00'
       this.evento.end = this.evento.end + ' 23:00:00';
       this.eventService.saveEvents(this.evento).then(data => {
@@ -58,7 +65,7 @@ export class ViewAppComponent implements OnInit {
         this.toastr.error('Intentalo de nuevo!', 'Oops algo ha salido mal!');
       });
     } else {
-     
+
       if (this.updateEvent.event.start._i !== this.evento.start || this.updateEvent.event.end._i !== this.evento.end) {
         this.evento.start = this.evento.start + ' 00:00:00'
         this.evento.end = this.evento.end + ' 23:00:00';
