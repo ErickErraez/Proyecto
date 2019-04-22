@@ -10,7 +10,7 @@
           <div class="content">
             <form>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <div class="form-group">
                     <b>
                       <label for="formGroupExampleInput">Ingrese el Titulo:</label>
@@ -29,11 +29,17 @@
                   <button type="submit" (click)="Cancelar()" class="btn btn-danger">Cancelar</button>
                 </div>
                 <div class="col-md-1"></div>
-                <div class="col-md-5">
-                  <img (click)="fileInput.click()" class="card-img fotoPerfilPortada redondeado altura" src="{{srcFoto}}"
-                    width="410" height="310px" />
+                <div class="col-md-6">
+                  <label for="formGroupExampleInput">Imagen Enterate: &nbsp; </label>
+                  <img (click)="fileInput.click()" class="card-img fotoPerfilPortada redondeado altura"
+                    src="{{srcFoto}}" width="310" height="210px" />
                   <input hidden=true type="file" style="display: none;" #fileInput (change)="CodificarArchivo($event)"
-                    accept="image/*">
+                    accept="image/*"> <br> <br> <br><br> <br> <br>
+                    <label for="formGroupExampleInput">Imagen Home:  &nbsp;</label>
+                    <img (click)="fileHome.click()" class="card-img fotoPerfilPortada redondeado altura"
+                      src="{{srcHome}}" width="310" height="210px" />
+                    <input hidden=true type="file" style="display: none;" #fileHome (change)="CodificarArchivoHome($event)"
+                      accept="image/*">
                 </div>
               </div>
             </form>
@@ -49,14 +55,13 @@
         <div class="card-body">
           <ul class="timeline">
             <ng-container *ngFor="let ent of enterates; let i=index;">
-              <li [ngClass]=" typeClass(i) ? '' : 'timeline-inverted'">
+              <li [ngClass]=" typeClass(i) ? '' : 'timeline-inverted'"
+                (click)="showEnterate(ent.titulo,ent.adjunto.adjuntoArchivo)">
                 <div class="timeline-badge warning"><i class="fas fa-award"></i>
                 </div>
                 <div class="timeline-panel">
-
-                  <h5 class="timeline-title">{{ent.titulo}}<br> <span class="posicionRigth">{{ent.fecha | date | uppercase }}</span></h5>
-                  <img class="redondeado" src="data:{{ent.adjunto.tipoArchivo}};base64,{{ent.adjunto.adjuntoArchivo}}"
-                    width="435px" height="355px">
+                  <h5 class="timeline-title">ENTERATE {{ent.idEnt}}: &nbsp;{{ent.titulo | uppercase}}<br> <span
+                      class="posicionRigth">{{ent.fecha | date | uppercase }}</span></h5>
                 </div>
               </li>
             </ng-container>

@@ -14,7 +14,6 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/aplication', title: 'Aplicaciones', icon: 'pe-7s-keypad', class: '', condition() { return true } },
   { path: '/library', title: 'Biblioteca  Digital', icon: 'pe-7s-notebook', class: '', condition() { return true } },
-  { path: '/icons', title: 'Icons', icon: 'pe-7s-science', class: '', condition() { return true } },
   { path: '/view', title: 'Eventos', icon: 'pe-7s-date', class: '', condition() { return true } },
   { path: '/enterate', title: 'Enterates', icon: 'pe-7s-gift', class: '', condition() { return true } },
   {

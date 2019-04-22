@@ -42,6 +42,20 @@ public class EnteratesServiceImpl implements EnteratesService {
 		return _enteratesDao.findById(idEnt);
 	}
 
+	
+	
+	@Override
+	public Enterates findLastId() {
+		// TODO Auto-generated method stub
+		return _enteratesDao.findLastId();
+	}
+
+	@Override
+	public List<Enterates> findAllActual() {
+		// TODO Auto-generated method stub
+		return _enteratesDao.findAllActual();
+	}
+
 	@Override
 	public List<Enterates> findAllEnterates() {
 		// TODO Auto-generated method stub

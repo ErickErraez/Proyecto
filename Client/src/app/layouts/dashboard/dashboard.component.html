@@ -2,8 +2,67 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h3 class="title">Bienvenidos a la nueva Intranet</h3>
-        <img src="assets/img/photo.jpg" width="95px" height="95px">
+        <section class="awSlider" *ngIf="enterates.length == 0">
+          <div class="carousel slide" data-ride="carousel" data-interval="3000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators colorNegro">
+              <li data-target=".carousel" data-slide-to="0" class="item active"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="assets/img/nohay.jpg" width="435px" height="355px" />
+                <div class="carousel-caption"></div>
+              </div>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Anterior</span>
+            </a>
+            <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Siguiente</span>
+            </a>
+          </div>
+        </section>
+        <section class="awSlider" *ngIf="enterates.length != 0">
+          <div class="carousel slide" data-ride="carousel" data-interval="2000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators colorNegro">
+              <li *ngFor="let item of enterates; let i=index;" data-target=".carousel" data-slide-to="i"
+                [ngClass]=" typeClass(i) ? 'active' : ''"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div *ngFor="let item of enterates; let i=index;"
+                [ngClass]=" typeClass(i) ? 'item active container' : 'item container'">
+                <img *ngIf="item.tipo == 'enterate'"
+                  src="data:{{item.home.tipoArchivo}};base64,{{item.home.adjuntoArchivo}}"
+                  (click)="showEnterate(item.titulo,item.adjunto.adjuntoArchivo)" width="435px" height="355px" />
+
+                <img (click)="irCalendario()" *ngIf="item.tipo == 'cumpleanos'" src="assets/img/cumple.jpg"
+                  width="435px" height="355px" />
+                <img (click)="irCalendario()" *ngIf="item.tipo == 'evento'" src="assets/img/evento.jpg " width="435px"
+                  height="355px" />
+                <div *ngIf="item.tipo == 'enterate'" class="carousel-caption">{{item.titulo}}</div>
+                <div *ngIf="item.tipo == 'cumpleanos'" class="carousel-caption">{{item.title}}</div>
+                <div *ngIf="item.tipo == 'evento'" class="carousel-caption">{{item.title}}</div>
+              </div>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Anterior</span>
+            </a>
+            <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Siguiente</span>
+            </a>
+          </div>
+        </section>
       </div>
     </div>
   </div>

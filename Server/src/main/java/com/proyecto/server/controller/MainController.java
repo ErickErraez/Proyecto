@@ -1,5 +1,8 @@
 package com.proyecto.server.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
 
 import javax.naming.Context;
@@ -24,8 +27,8 @@ public class MainController {
 	@ResponseBody
 	public String index() {
 		String response = "Bienvenido al Sistema";
+		 
 		
-		System.out.println(org.hibernate.Version.getVersionString());
 		return response;
 	}
 

@@ -24,6 +24,9 @@ public class Enterates implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idEnt;
 	
+	@Column(name="tipo")
+	private String tipo;
+	
 	@Column(name="titulo")
 	private String titulo;
 	
@@ -33,6 +36,10 @@ public class Enterates implements Serializable{
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idAdj")
 	private Adjunto adjunto;
+	
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idHome")
+	private Adjunto home;
 	
 	
 
@@ -76,6 +83,18 @@ public class Enterates implements Serializable{
 
 
 
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
 	public String getFecha() {
 		return fecha;
 	}
@@ -97,6 +116,19 @@ public class Enterates implements Serializable{
 	public void setAdjunto(Adjunto adjunto) {
 		this.adjunto = adjunto;
 	}
+
+
+
+	public Adjunto getHome() {
+		return home;
+	}
+
+
+
+	public void setHome(Adjunto home) {
+		this.home = home;
+	}
+	
 	
 	
 }

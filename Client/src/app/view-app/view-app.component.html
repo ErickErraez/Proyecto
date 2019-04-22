@@ -1,8 +1,8 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12"><button *ngIf="!isNewEvent" type="button" class="btn btn-dark btn-fill"
-          (click)="loadevents()">
+      <div class="col-md-12">
+        <button *ngIf="!isNewEvent" type="button" class="btn btn-dark btn-fill" (click)="loadevents()">
           <span class="fas fa-redo-alt"></span>&nbsp;Mostrar
         </button>
         <ng-container *ngIf="checkRol()">
@@ -16,13 +16,20 @@
                   <form>
                     <div class="row">
                       <div class="col-md-12">
-                          <label for="formGroupExampleInput">Ingrese el Titulo del evento:</label><br>
+                        <label for="formGroupExampleInput">Ingrese el Titulo del evento:</label><br>
                         <input type="text" class="form-control" id="birthdate" [(ngModel)]="evento.title"
                           name="title"><br>
-                          <label for="formGroupExampleInput">Ingrese la fecha de Inicio:</label><br>
+                        <label for="formGroupExampleInput"> Tipo Aplicacion:</label><br>
+                        <select class="custom-select" [(ngModel)]="evento.tipo" name="tipo">
+                          <option value="Seleccione" selected>Seleccione...</option>
+                          <option value="cumpleanos">Cumpleaños </option>
+                          <option value="evento">Evento Especial</option>
+                        </select>
+                        <br> <br>
+                        <label for="formGroupExampleInput">Ingrese la fecha de Inicio:</label><br>
                         <input type="date" class="form-control" id="birthdate" [(ngModel)]="evento.start" name="start">
                         <br>
-                        <label for="formGroupExampleInput">Ingrese  la fecha de Finalizacion:</label><br>
+                        <label for="formGroupExampleInput">Ingrese la fecha de Finalizacion:</label><br>
                         <input type="date" class="form-control" id="birthdate" [(ngModel)]="evento.end" name="end"> <br>
 
                         <button type="button" class="btn btn-primary btn-fill" (click)="saveEvent()">
@@ -42,7 +49,9 @@
             <span class="far fa-calendar-plus"></span>&nbsp;Nuevo Evento
           </button>
         </ng-container>
-        <br> <br>
+        &nbsp; <span class="cumple">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<b>CUMPLEAÑOS</b> &nbsp;
+        <span class="evento">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        &nbsp;<b>EVENTOS ESPECIALES</b> <br> <br>
         <div *ngIf="calendarOptions">
           <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events"
             (eventClick)="eventClick($event.detail)">

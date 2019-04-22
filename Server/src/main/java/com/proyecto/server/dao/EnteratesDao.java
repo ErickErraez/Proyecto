@@ -17,6 +17,10 @@ public interface EnteratesDao {
 	
 	Enterates findById(Long idEnt);
 	
+	Enterates findLastId();
+	
+	List<Enterates> findAllActual();
+	
 	List<Enterates> findAllEnterates();
 	
 }

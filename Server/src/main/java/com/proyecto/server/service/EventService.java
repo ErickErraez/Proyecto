@@ -20,4 +20,6 @@ public interface EventService {
 	
 	Events findByName(String title);
 
+	List<Events> findAllActual();
+	
 }

@@ -14,6 +14,10 @@ public interface EnteratesService {
 	
 	Enterates findById(Long idEnt);
 	
+	Enterates findLastId();
+	
+	List<Enterates> findAllActual();
+	
 	List<Enterates> findAllEnterates();
 	
 
