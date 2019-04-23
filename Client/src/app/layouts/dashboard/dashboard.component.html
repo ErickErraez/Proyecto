@@ -41,11 +41,11 @@
                 [ngClass]=" typeClass(i) ? 'item active container' : 'item container'">
                 <img *ngIf="item.tipo == 'enterate'"
                   src="data:{{item.home.tipoArchivo}};base64,{{item.home.adjuntoArchivo}}"
-                  (click)="showEnterate(item.titulo,item.adjunto.adjuntoArchivo)" width="435px" height="355px" />
+                  (click)="showEnterate(item.titulo,item.adjunto.adjuntoArchivo)" width="auto" height="355px" />
 
                 <img (click)="irCalendario()" *ngIf="item.tipo == 'cumpleanos'" src="assets/img/cumple.jpg"
-                  width="435px" height="355px" />
-                <img (click)="irCalendario()" *ngIf="item.tipo == 'evento'" src="assets/img/evento.jpg " width="435px"
+                  width="auto" height="355px" />
+                <img (click)="irCalendario()" *ngIf="item.tipo == 'evento'" src="assets/img/evento.jpg " width="auto"
                   height="355px" />
                 <div *ngIf="item.tipo == 'enterate'" class="carousel-caption">{{item.titulo}}</div>
                 <div *ngIf="item.tipo == 'cumpleanos'" class="carousel-caption">{{item.title}}</div>
