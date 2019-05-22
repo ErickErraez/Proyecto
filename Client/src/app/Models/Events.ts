@@ -7,5 +7,6 @@ export class Eventos {
     backgroundColor: String;
     start: any;
     end: any;
+    detalle: String;
 
 }

@@ -237,7 +237,9 @@ export class LibraryComponent implements OnInit {
           this.cat.biblioteca = this.library;
           this.cat.idCat = catalogo.json().idCat;
           this.http.put(environment.url + 'catalogo/cats/adjs', this.cat).toPromise().then(cat => {
-
+            this.toastr.success('Todos los Datos!', 'Se han guardado con exito!');
+            this.getData();
+            this.Cancelar();
           }).catch(catError => {
             console.log(catError);
           });

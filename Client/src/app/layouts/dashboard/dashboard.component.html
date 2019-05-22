@@ -46,10 +46,10 @@
                 <img (click)="irCalendario()" *ngIf="item.tipo == 'cumpleanos'" src="assets/img/cumple.jpg"
                   width="auto" height="355px" />
                 <img (click)="irCalendario()" *ngIf="item.tipo == 'evento'" src="assets/img/evento.jpg " width="auto"
-                  height="355px" />
+                  height="420px" />
                 <div *ngIf="item.tipo == 'enterate'" class="carousel-caption">{{item.titulo}}</div>
                 <div *ngIf="item.tipo == 'cumpleanos'" class="carousel-caption">{{item.title}}</div>
-                <div *ngIf="item.tipo == 'evento'" class="carousel-caption">{{item.title}}</div>
+                <div *ngIf="item.tipo == 'evento'" class="carousel-caption">{{item.title}}<br><span style="font-size: 2vw;">{{item.detalle}}</span></div>
               </div>
             </div>
             <!-- Controls -->

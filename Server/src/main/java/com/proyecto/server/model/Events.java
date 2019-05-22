@@ -40,6 +40,9 @@ public class Events implements Serializable{
 	
 	@Column(name="end")
 	private String end;
+        
+        @Column(name="detalle")
+        private String detalle;
 
 	
 	public Events() {
@@ -48,11 +51,12 @@ public class Events implements Serializable{
 	}
 
 
-	public Events(String title, String start, String end) {
+	public Events(String title, String start, String end, String detalle) {
 		super();
 		this.title = title;
 		this.start = start;
 		this.end = end;
+                this.detalle = detalle;
 	}
 
 
@@ -113,6 +117,20 @@ public class Events implements Serializable{
 	public void setEnd(String end) {
 		this.end = end;
 	}
+
+    /**
+     * @return the detalle
+     */
+    public String getDetalle() {
+        return detalle;
+    }
+
+    /**
+     * @param detalle the detalle to set
+     */
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
 
 	
 }
