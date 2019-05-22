@@ -29,10 +29,10 @@ public class DataBaseConfiguration {
 	@Bean
 	public DataSource dataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                	dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/intranet?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); 
-                dataSource.setUsername("prueba");
-		dataSource.setPassword("12345678");
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+                	dataSource.setUrl("jdbc:mysql://10.0.20.130:3306/senadi_intranet?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"); 
+                dataSource.setUsername("iepi-solicitudes");
+		dataSource.setPassword("5ad0d5c3fced39d5048f");
 		
 		return dataSource;
 	}

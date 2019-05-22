@@ -16,9 +16,13 @@
                   <form>
                     <div class="row">
                       <div class="col-md-12">
-                        <label for="formGroupExampleInput">Ingrese el Titulo del evento:</label><br>
-                        <input type="text" class="form-control" id="birthdate" [(ngModel)]="evento.title"
+                        <label for="titleEvent">Ingrese el Titulo del evento:</label><br>
+                        <input type="text" class="form-control" id="titleEvent" [(ngModel)]="evento.title"
                           name="title"><br>
+
+                        <label for="detalleForm">Detalle</label><br>
+                        <input type="text" class="form-control" id="detalleForm" [(ngModel)]="evento.detalle" name="detalle"><br>
+
                         <label for="formGroupExampleInput"> Tipo Aplicacion:</label><br>
                         <select class="custom-select" [(ngModel)]="evento.tipo" name="tipo">
                           <option value="Seleccione" selected>Seleccione...</option>
@@ -26,11 +30,11 @@
                           <option value="evento">Evento Especial</option>
                         </select>
                         <br> <br>
-                        <label for="formGroupExampleInput">Ingrese la fecha de Inicio:</label><br>
-                        <input type="date" class="form-control" id="birthdate" [(ngModel)]="evento.start" name="start">
+                        <label for="startDate">Ingrese la fecha de Inicio:</label><br>
+                        <input type="date" class="form-control" id="startDate" [(ngModel)]="evento.start" name="start">
                         <br>
-                        <label for="formGroupExampleInput">Ingrese la fecha de Finalizacion:</label><br>
-                        <input type="date" class="form-control" id="birthdate" [(ngModel)]="evento.end" name="end"> <br>
+                        <label for="endDate">Ingrese la fecha de Finalizacion:</label><br>
+                        <input type="date" class="form-control" id="endDate" [(ngModel)]="evento.end" name="end"> <br>
 
                         <button type="button" class="btn btn-primary btn-fill" (click)="saveEvent()">
                           <span class="fa fa-save"></span>&nbsp;Guardar
